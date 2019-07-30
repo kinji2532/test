@@ -3,7 +3,6 @@ const client = new Discord.Client();
 let one;
 let two;
 let saymode = true;
-let chlogs = [];
 let dummy;
 
 client.on('ready', () => {
@@ -115,16 +114,6 @@ function uuid(test) {
   }
   return uuid;
 }
-function inputmemo(A){
-  if (A.startsWith("/bot")){
-    return;
-  }else{
-    memo.unshift(A)
-    if (memo.length == 101){
-      memo.pop();
-    }
-  }
-}
 
 client.on('message', message => {
   if (message.author.bot) {
@@ -220,8 +209,6 @@ client.on('message', message => {
   ]
 }`);
   }
-  }else if (message.content == "ちきんじ"　|| message.content == "チキンジ") {
-  message.channel.send("ちきんじいうなし( 'ω')");
   }else if (message.content.startsWith("/slot")) {
   const slot = message.content.split(" ")
   message.delete(1);
@@ -271,8 +258,12 @@ client.on('message', message => {
       message.channel.send("数値にしてね")
     }
   }
+}else if (message.content == "ちきんじ"　|| message.content == "チキンジ") {
+message.channel.send(`${message.content}いうなし( 'ω')`);
   }else if (message.content === '/u') {
     message.channel.send(uuid());
+  }else if (message.content.match("chickenji")){
+    message.delete(1);
   }else if (message.content === "れきゅ") {
   message.channel.send("呼んだ？");
   }else if (message.content.match("おはよ")) {
@@ -395,12 +386,15 @@ uuid単体生成は/uだよ
   }
 }
 });
+
 /*
 https://dashboard.heroku.com/apps/kinjibot/resources
-cd discordbot/
+cd discordbot2/
+git init
+heroku git:remote -a kinjisbot
 git add .
 git commit -m "First commit"
 git push heroku master --force
-heroku logs -a kinjibot
+heroku logs -a kinjisbot
 */
 client.login(process.env.BOT_TOKEN);
