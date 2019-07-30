@@ -258,7 +258,7 @@ client.on('message', message => {
       message.channel.send("数値にしてね")
     }
   }
-}else if (message.content == "ちきんじ"　|| message.content == "チキンジ") {
+  }else if (message.content == "ちきんじ"　|| message.content == "チキンジ") {
 message.channel.send(`${message.content}いうなし( 'ω')`);
   }else if (message.content === '/u') {
     message.channel.send(uuid());
