@@ -82,7 +82,7 @@ function filter(A,B,C,D,E){
 }`;
       return filter;
     }
-  }else if (C !== true || C !== false){
+  }else if (C !== "true" || C !== "false"){
     if(B == "self" || B == "other" || B == "target" || B == "player"){
       let filter = `{
     "test": "${test(A)}",
