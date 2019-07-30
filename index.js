@@ -361,7 +361,8 @@ uuid単体生成は/uだよ
   }else if (message.content.startsWith("/time")) {
     const time = message.content.split(" ")
     if (time[1] !== undefined && isFinite(time[1])){
-      message.channel.send(`variable.time = variable.time < ${time[1]} ? variable.time + 1:0; return variable.time == 0;`);
+      let timeselect = time[1].split(".")
+      message.channel.send(`variable.time = variable.time < ${timeselect[0]} ? variable.time + 1:0; return variable.time == 0;`);
     }else{
       message.channel.send("生成する時間をtick単位で入力してください");
     }
