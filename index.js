@@ -271,7 +271,8 @@ client.on('message', message => {
   }else if (message.content.match("chickenji")){
     message.delete(1);
   }else if (message.content　===　`いいぞ、もっといえ
-ちきんじちきんじ`){
+ちきんじちきんじ` || (message.content　===　`いいぞ、もっといえ
+チキンジチキンジ`){
   if (deletemode){
     message.delete(1);
   }
