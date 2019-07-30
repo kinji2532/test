@@ -4,7 +4,7 @@ let one;
 let two;
 let saymode = true;
 let dummy;
-let deletomode = false;
+let deletemode = false;
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
