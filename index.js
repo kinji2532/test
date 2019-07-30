@@ -97,16 +97,16 @@ function filter(A,B,C,D,E){
     "value": "${value(C)}"
   }`;
       return filter;
-    }else if (B !== "true" || B !== "false"){
+    }else if (B === "true" || B === "false"){
       let filter = `{
     "test": "${test(A)}",
-    "value": "${value(B)}"
+    "value": ${value(B)}
   }`;
       return filter;
     }else{
       let filter = `{
     "test": "${test(A)}",
-    "value": ${value(B)}
+    "value": "${value(B)}"
   }`;
       return filter;
     }
