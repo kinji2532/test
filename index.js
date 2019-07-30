@@ -120,8 +120,9 @@ client.on('message', message => {
     return;
   }else if (message.content === "/deletemode"){
     message.delete(1);
-    if (deletemode === false){
-      deletomode = true
+    if (!deletemode){
+      deletemode = true
+
     }else{
       deletemode = false
     }
