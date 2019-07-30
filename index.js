@@ -266,7 +266,7 @@ client.on('message', message => {
 ちきんじちきんじ`){
 //    message.delet(1);
     message.channel.send("ばーかばーか");
-  }else if (message.content　===　"ばかはおまえだ( 'ω')"){
+  }else if (message.content　===　"ばかはお前だ( 'ω')"){
 //    message.delet(1);
     message.channel.send("うるせー");
   }else if (message.content === "れきゅ") {
