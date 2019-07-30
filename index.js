@@ -4,7 +4,7 @@ let one;
 let two;
 let saymode = true;
 let dummy;
-
+let deletomode = false;
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -118,6 +118,12 @@ function uuid(test) {
 client.on('message', message => {
   if (message.author.bot) {
     return;
+  }else if (message.content === "/deletomode"){
+    if (!deletomode){
+      deletomode = true
+    }else{
+      deletomode = false
+    }
   }else if (message.content.startsWith("/m-")) {
     const set = message.content.split(" ")
     if (set[0] == "/m-b"){
@@ -264,11 +270,16 @@ client.on('message', message => {
     message.delete(1);
   }else if (message.content　===　`いいぞ、もっといえ
 ちきんじちきんじ`){
-//    message.delet(1);
-    message.channel.send("ばーかばーか");
+  if (deletomode){
+    message.delet(1);
+  }
+  message.channel.send("ばーかばーか");
   }else if (message.content　===　"ばかはお前だ( 'ω')"){
-//    message.delet(1);
-    message.channel.send("うるせー");
+    if (deletomode){
+      message.delet(1);
+    }else{
+      message.channel.send("うるせー");      
+    }
   }else if (message.content === "れきゅ") {
   message.channel.send("呼んだ？");
   }else if (message.content.match("おはよ")) {
