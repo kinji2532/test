@@ -262,6 +262,8 @@ client.on('message', message => {
     message.channel.send(uuid());
   }else if (message.content.match("chickenji")){
     message.delete(1);
+  }else if (message.content.match("いいぞ、もっといえ")){
+    message.channel.send("ばーかばーか");
   }else if (message.content === "れきゅ") {
   message.channel.send("呼んだ？");
   }else if (message.content.match("おはよ")) {
