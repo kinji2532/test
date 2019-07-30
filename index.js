@@ -119,6 +119,7 @@ client.on('message', message => {
   if (message.author.bot) {
     return;
   }else if (message.content === "/deletomode"){
+    message.delet(1);
     if (!deletomode){
       deletomode = true
     }else{
@@ -278,7 +279,7 @@ client.on('message', message => {
     if (deletomode){
       message.delet(1);
     }else{
-      message.channel.send("うるせー");      
+      message.channel.send("うるせー");
     }
   }else if (message.content === "れきゅ") {
   message.channel.send("呼んだ？");
