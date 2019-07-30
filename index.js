@@ -272,12 +272,12 @@ client.on('message', message => {
     message.delete(1);
   }else if (message.content　===　`いいぞ、もっといえ
 ちきんじちきんじ`){
-  if (deletemode === true){
+  if (deletemode){
     message.delete(1);
   }
   message.channel.send("ばーかばーか");
   }else if (message.content　===　"ばかはお前だ( 'ω')"){
-    if (deletemode === true){
+    if (deletemode){
       message.delete(1);
     }else{
       message.channel.send("うるせー");
