@@ -119,7 +119,7 @@ client.on('message', message => {
   if (message.author.bot) {
     return;
   }else if (message.content === "/deletemode"){
-    message.delet(1);
+    message.delete(1);
     if (!deletemode){
       deletomode = true
     }else{
@@ -272,12 +272,12 @@ client.on('message', message => {
   }else if (message.content　===　`いいぞ、もっといえ
 ちきんじちきんじ`){
   if (deletemode){
-    message.delet(1);
+    message.delete(1);
   }
   message.channel.send("ばーかばーか");
   }else if (message.content　===　"ばかはお前だ( 'ω')"){
     if (deletemode){
-      message.delet(1);
+      message.delete(1);
     }else{
       message.channel.send("うるせー");
     }
