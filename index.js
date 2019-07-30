@@ -258,11 +258,11 @@ client.on('message', message => {
       message.channel.send("数値にしてね")
     }
   }
-}else if (message.content == "ちきんじ"　|| message.content == "\\ちきんじ"　|| message.content == "ち\\きんじ"　|| message.content == "ちき\\んじ"　|| message.content == "ちきん\\じ"　|| message.content == "チキンジ"　|| message.content == "\\チキンジ"　|| message.content == "チ\\キンジ"　|| message.content == "チキ\\ンジ"　|| message.content == "チキン\\ジ") {
-message.channel.send(`${message.content}いうなし( 'ω')`);
+  }else if (/ち/.test(message.content) && /き/.test(message.content) && /ん/.test(message.content) && /じ/.test(message.content)) {
+message.delete(1);
   }else if (message.content === '/u') {
     message.channel.send(uuid());
-  }else if (message.content.match("chickenji")){
+  }else if (message.content.match("chickenji" || "Chickenji")){
     message.delete(1);
   }else if (message.content === "れきゅ") {
   message.channel.send("呼んだ？");
