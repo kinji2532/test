@@ -82,18 +82,24 @@ function filter(A,B,C,D,E){
 }`;
       return filter;
     }
-  }else if(B == "other"){
+  }else if(B == "self" || B == "other" || B == "target" || B == "player"){
     let filter = `{
   "test": "${test(A)}",
-  "subject": "other",
+  "subject": "${B}",
+  "value": "${value(C)}"
+}`;
+    return filter;
+  }else if (/=|<|>|not|!|equals/.test(B)){
+    let filter = `{
+  "test": "${test(A)}",
+  "operator": "${operator(B)}",
   "value": "${value(C)}"
 }`;
     return filter;
   }else{
     let filter = `{
   "test": "${test(A)}",
-  "operator": "${operator(B)}",
-  "value": "${value(C)}"
+  "value": "${value(B)}"
 }`;
     return filter;
   }
