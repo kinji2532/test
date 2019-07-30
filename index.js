@@ -82,7 +82,23 @@ function filter(A,B,C,D,E){
 }`;
       return filter;
     }
-  }else if (C !== "true" || C !== "false"){
+  }else if (C === "true" || C === "false"){
+    if(B == "self" || B == "other" || B == "target" || B == "player"){
+      let filter = `{
+    "test": "${test(A)}",
+    "subject": "${B}",
+    "value": ${value(C)}
+  }`;
+      return filter;
+    }else if (/=|<|>|not|!|equals/.test(B)){
+      let filter = `{
+    "test": "${test(A)}",
+    "operator": "${operator(B)}",
+    "value": ${value(C)}
+  }`;
+      return filter;
+    }
+  }else{
     if(B == "self" || B == "other" || B == "target" || B == "player"){
       let filter = `{
     "test": "${test(A)}",
@@ -107,22 +123,6 @@ function filter(A,B,C,D,E){
       let filter = `{
     "test": "${test(A)}",
     "value": "${value(B)}"
-  }`;
-      return filter;
-    }
-  }else{
-    if(B == "self" || B == "other" || B == "target" || B == "player"){
-      let filter = `{
-    "test": "${test(A)}",
-    "subject": "${B}",
-    "value": ${value(C)}
-  }`;
-      return filter;
-    }else if (/=|<|>|not|!|equals/.test(B)){
-      let filter = `{
-    "test": "${test(A)}",
-    "operator": "${operator(B)}",
-    "value": ${value(C)}
   }`;
       return filter;
     }
