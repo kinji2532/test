@@ -263,7 +263,7 @@ client.on('message', message => {
   }else if (message.content.match("chickenji")){
     message.delete(1);
   }else if (message.content　===　`いいぞ、もっといえ
-  ちきんじちきんじ`){
+ちきんじちきんじ`){
 //    message.delet(1);
     message.channel.send("ばーかばーか");
   }else if (message.content　===　"ばかはおまえだ( 'ω')"){
