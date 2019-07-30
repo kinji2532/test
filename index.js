@@ -300,9 +300,7 @@ client.on('message', message => {
     message.channel.send(uuid());
   }else if (message.content.match("chickenji")){
     message.delete(1);
-  }else if (message.content　===　`いいぞ、もっといえ
-ちきんじちきんじ` || message.content　===　`いいぞ、もっといえ
-チキンジチキンジ`){
+  }else if (message.content.startsWith("いいぞ、もっといえ")){
   if (deletemode){
     message.delete(1);
   }
