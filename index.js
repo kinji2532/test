@@ -321,7 +321,7 @@ client.on('message', message => {
   }else if (message.content === '/u') {
     message.channel.send(uuid());
   }else if (message.content === "ちきんじ"　|| message.content === "チキンジ") {
-    let randoms = Math.floor(Math.random() * 10
+    let randoms = Math.floor(Math.random() * chickenji.length)
     message.channel.send(chickenji[randoms]);
   }else if (message.content === "れきゅ") {
   message.channel.send("呼んだ？");
@@ -434,7 +434,7 @@ uuid単体生成は/uだよ
     }
   }
   }else{
-  let random = Math.floor(Math.random() * chickenji.length);
+  let random = Math.floor(Math.random() * 10);
   if (random == 0){
     if (message.content　=== "( 'ω')") {
       message.channel.send("( 'ω')");
