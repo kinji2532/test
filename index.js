@@ -4,7 +4,6 @@ let one;
 let two;
 let saymode = true;
 let dummy;
-let deletemode = false;
 let chickenji = [
   "ちきんじいうなし( 'ω')",
   "ちきんじいうなし( 'ω')",
@@ -201,14 +200,6 @@ function uuid(test) {
 client.on('message', message => {
   if (message.author.bot) {
     return;
-  }else if (message.content === "/deletemode"){
-    message.delete(1);
-    if (!deletemode){
-      deletemode = true
-
-    }else{
-      deletemode = false
-    }
   }else if (message.content.startsWith("/m-")) {
     const set = message.content.split(" ")
     if (set[0] == "/m-b"){
@@ -465,7 +456,7 @@ uuid単体生成は/uだよ
     }
   }
   }else{
-  let random = Math.floor(Math.random() * 10);
+  let random = Math.floor(Math.random() * 5);
   if (random == 0){
     if (message.content　=== "( 'ω')") {
       message.channel.send("( 'ω')");
