@@ -5,6 +5,28 @@ let two;
 let saymode = true;
 let dummy;
 let deletemode = false;
+let chickenji = [
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ちきんじいうなし( 'ω')",
+  "ふんだ",
+  "もー",
+  "そういうこと言う人きらいです",
+  "ばーかばーか"
+]
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
@@ -298,19 +320,9 @@ client.on('message', message => {
   }
   }else if (message.content === '/u') {
     message.channel.send(uuid());
-  }else if (message.content.match("chickenji")){
-    message.delete(1);
-  }else if (message.content.startsWith("いいぞ、もっといえ")){
-  if (deletemode){
-    message.delete(1);
-  }
-  message.channel.send("ばーかばーか");
-  }else if (message.content　===　"ばかはお前だ( 'ω')"){
-    if (deletemode){
-      message.delete(1);
-    }else{
-      message.channel.send("うるせー");
-    }
+  }else if (message.content === "ちきんじ"　|| message.content === "チキンジ") {
+    let randoms = Math.floor(Math.random() * 10
+    message.channel.send(chickenji[randoms]);
   }else if (message.content === "れきゅ") {
   message.channel.send("呼んだ？");
   }else if (message.content.match("おはよ")) {
@@ -422,7 +434,7 @@ uuid単体生成は/uだよ
     }
   }
   }else{
-  let random = Math.floor(Math.random() * 11);
+  let random = Math.floor(Math.random() * chickenji.length);
   if (random == 0){
     if (message.content　=== "( 'ω')") {
       message.channel.send("( 'ω')");
