@@ -162,20 +162,32 @@ let component = [
     "value": ``
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft：behavior.flee_sun",
+    "value": `
+    "minecraft:behavior.flee_sun": {
+      "speed_multiplier": 3
+    },`
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft：behavior.float",
+    "value": `
+      "minecraft：behavior.float": {},`
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft：behavior.follow_owner",
+    "value": `
+    "minecraft:behavior.follow_owner": {
+      "speed_multiplier": 1.0,
+      "start_distance": 10,
+      "stop_distance": 2
+    },`
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft：behavior.follow_parent",
+    "value": `
+    "minecraft:behavior.follow_parent": {
+      "speed_multiplier": 1.1
+    },`
   },
   {
     "name":"",
