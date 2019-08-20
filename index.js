@@ -104,16 +104,28 @@ let component = [
     },`
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft:behavior.breed",
+    "value": `
+    "minecraft:behavior.breed": {},`
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft:behavior.charge_held_item",
+    "value": `
+    "minecraft:behavior.charge_held_item": {
+      "items": [ "minecraft:arrow" ]
+    },`
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft：behavior.defend_village_target",
+    "value": `
+    "minecraft:behavior.defend_village_target": {
+      "filters": {},
+      "max_dist": 1,
+      "walk_speed_multiplier": 1,
+      "sprint_speed_multiplier": 1,
+      "must_see": 1,
+      "must_see_forget_duration": 1
+    },`
   },
   {
     "name":"",
