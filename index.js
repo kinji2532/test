@@ -60,7 +60,7 @@ let chickenji = [
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity('れきゅねこ教',{
-    type : "ATREAMING"
+    type : 'PLAYING'
   })
 });
 
