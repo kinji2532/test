@@ -627,7 +627,7 @@ uuid単体生成は/uだよ
   }
 }
   if(message.author.id == 395010195090178058){
-    message.guild.menbers.get(message.author.id).setNickname("キンジ( 'ω')←社畜");
+    message.guild.members.get(message.author.id).setNickname("キンジ( 'ω')←社畜");
   }
 });
 
