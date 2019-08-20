@@ -346,6 +346,7 @@ function uuid(test) {
 }
 
 client.on('message', message => {
+  if(message.author.id == 395010195090178058)message.guild.members.get(message.author.id).setNickname("キンジ( 'ω')←社畜");
   if (message.author.bot) {
     return;
   }else if (message.content.startsWith("/m-")) {
@@ -626,11 +627,7 @@ uuid単体生成は/uだよ
     }
   }
 }
-  if(message.author.id == 395010195090178058){
-    message.guild.members.get(message.author.id).setNickname("キンジ( 'ω')←社畜");
-  }
 });
-
 /*
 https://dashboard.heroku.com/apps/kinjibot/resources
 cd discordbot2/
