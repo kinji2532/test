@@ -76,15 +76,40 @@ let component = [
         ]
       },`
 },
-{
-  "name":"minecraft:behavior.beg",
-  "value": `
+  {
+    "name":"minecraft:behavior.beg",
+    "value": `
       "minecraft:behavior.beg": {
         "look_distance": 1,
         "look_time": 1,
         "items": [ "" ]
       },`
-}
+  },
+  {
+    "name":"minecraft:behavior.break_doors",
+    "value": `
+      "minecraft:behavior.break_door": {}`
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  }
 ]
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
