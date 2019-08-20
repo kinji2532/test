@@ -91,8 +91,17 @@ let component = [
       "minecraft:behavior.break_door": {}`
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft:behavior.stomp_turtle_egg",
+    "value": `
+    "minecraft:behavior.stomp_turtle_egg": {
+      "priority": 4,
+      "speed_multiplier": 1,
+      "search_range": 10,
+      "search_height": 3,
+      "goal_radius": 1.14,
+      "search_count": 4,
+      "interval": 20
+    },`
   },
   {
     "name":"",
@@ -519,7 +528,7 @@ uuid単体生成は/uだよ
       if(com == ""){
         return;
       }else if(component[co].name.match(com)){
-        message.channel.send("```" + component[co]["value"] + "```")
+        message.channel.send("```\n" + component[co]["value"] + "```")
       }
     }
   }else{
