@@ -74,7 +74,15 @@ let component = [
     }
   ]
 },`
-  }
+},
+{
+  "name":"minecraft:behavior.beg",
+  "value": `"minecraft:behavior.beg": {
+    "look_distance": 1,
+    "look_time": 1,
+    "items": [ "" ]
+},`
+}
 ]
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -481,7 +489,9 @@ uuid単体生成は/uだよ
   }else if (message.content.startsWith("/")) {
     for(let co = 0;co < component.length;co ++){
       let com = message.content.replace("/","")
-      if(component[co].name.match(com)){
+      if(com == ""){
+        return;
+      }else if(component[co].name.match(com)){
         message.channel.send(component[co]["value"])
       }
     }
