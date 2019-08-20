@@ -60,28 +60,30 @@ let chickenji = [
 let component = [
   {
     "name":"minecraft:behavior.avoid_mob_type",
-    "value": `"minecraft:behavior.avoid_mob_type": {
-  "entity_types": [
-    {
-      "filters": {
-        "test" :  "",
-        "subject" : "",
-         "value" :  ""
-      },
-      "max_dist": 6,
-      "walk_speed_multiplier": 1,
-      "sprint_speed_multiplier": 1.2
-    }
-  ]
-},`
+    "value": `
+      "minecraft:behavior.avoid_mob_type": {
+        "entity_types": [
+          {
+            "filters": {
+              "test" :  "",
+              "subject" : "",
+               "value" :  ""
+            },
+            "max_dist": 6,
+            "walk_speed_multiplier": 1,
+            "sprint_speed_multiplier": 1.2
+          }
+        ]
+      },`
 },
 {
   "name":"minecraft:behavior.beg",
-  "value": `"minecraft:behavior.beg": {
-    "look_distance": 1,
-    "look_time": 1,
-    "items": [ "" ]
-},`
+  "value": `
+      "minecraft:behavior.beg": {
+        "look_distance": 1,
+        "look_time": 1,
+        "items": [ "" ]
+      },`
 }
 ]
 client.on('ready', () => {
@@ -492,7 +494,7 @@ uuid単体生成は/uだよ
       if(com == ""){
         return;
       }else if(component[co].name.match(com)){
-        message.channel.send(component[co]["value"])
+        message.channel.send("```" + component[co]["value"] + "```")
       }
     }
   }else{
