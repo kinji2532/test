@@ -57,6 +57,25 @@ let chickenji = [
   "そういうこと言う人きらいです",
   "ばーかばーか"
 ]
+let component = [
+  {
+    "name":"minecraft:behavior.avoid_mob_type",
+    "value": `"minecraft:behavior.avoid_mob_type": {
+  "entity_types": [
+    {
+      "filters": {
+        "test" :  "",
+        "subject" : "",
+         "value" :  ""
+      },
+      "max_dist": 6,
+      "walk_speed_multiplier": 1,
+      "sprint_speed_multiplier": 1.2
+    }
+  ]
+},`
+  }
+]
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity('れきゅねこ教',{
@@ -458,6 +477,14 @@ uuid単体生成は/uだよ
       }
     }
   }
+
+  }else if (message.content.startsWith("/")) {
+    for(let co = 0;co < component.length;co ++){
+      let com = message.conntent.replace("/","")
+      if(component[co].name.match(com)){
+        message.channel.send(component[co]["value"])
+      }
+    }
   }else{
   let random = Math.floor(Math.random() * 5);
   if (random == 0){
