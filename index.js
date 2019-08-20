@@ -143,15 +143,22 @@ let component = [
     },`
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft：behavior.door_interact",
+    "value": `
+      "minecraft：behavior.door_interact": {},`
   },
   {
-    "name":"",
-    "value": ``
+    "name":"minecraft：behavior.eat_block",
+    "value": `
+    "minecraft:behavior.eat_block": {
+      "on_eat": {
+        "event": "",
+        "target": "self"
+      }
+    },`
   },
   {
-    "name":"",
+    "name":"minecraft：behavior.explore_outskirts",
     "value": ``
   },
   {
@@ -506,7 +513,8 @@ uuid単体生成は/uだよ
 /filterでfilter部分の生成ができるよ
 \`\`\`/filter test operator (domain) value\`\`\`
 /ani で scripts,animations と　animation_controllers を生成するよ
-/time 数値　で時間間隔のMolangを生成するよ！`);
+/time 数値　で時間間隔のMolangを生成するよ！
+検索機能付いたよ！　/component名(一部可能)`);
   }else if (message.content.startsWith("/ani")) {
     let name = message.content.split(" ");
     if (name[1] == undefined){
