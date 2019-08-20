@@ -128,6 +128,57 @@ let component = [
     },`
   },
   {
+    "name":"minecraft：behavior.drink_potion",
+    "value": `
+    "minecraft:behavior.drink_potion": {
+      "priority": 1,
+      "speed_modifier": 0.0,
+      "potions": [
+        {
+          "id": 7,
+          "chance": 1.0,
+          "filters": {}
+        }
+      ]
+    },`
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
+    "name":"",
+    "value": ``
+  },
+  {
     "name":"",
     "value": ``
   }
