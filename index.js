@@ -494,7 +494,7 @@ client.on('message', message => {
     let randoms = Math.floor(Math.random() * chickenji.length)
     message.channel.send(chickenji[randoms]);
   }else if (message.content === "れきゅ") {
-  message.channel.send(message.author.id);
+  message.channel.send("よんだ？");
   }else if (message.content.match("おはよ")) {
   message.channel.send("おはよ－！");
   }else if (message.content.match("おやすみ")) {
