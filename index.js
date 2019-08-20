@@ -346,7 +346,6 @@ function uuid(test) {
 }
 
 client.on('message', message => {
-  message.guild.menbers.get(395010195090178058).setNickname("キンジ( 'ω')←社畜");
   if (message.author.bot) {
     return;
   }else if (message.content.startsWith("/m-")) {
@@ -627,6 +626,9 @@ uuid単体生成は/uだよ
     }
   }
 }
+  if(message.author.id == 395010195090178058){
+    message.guild.menbers.get(message.author.id).setNickname("キンジ( 'ω')←社畜");
+  }
 });
 
 /*
