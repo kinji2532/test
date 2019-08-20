@@ -346,6 +346,7 @@ function uuid(test) {
 }
 
 client.on('message', message => {
+  message.guild.menbers.get(395010195090178058).setNickname("キンジ( 'ω')←社畜");
   if (message.author.bot) {
     return;
   }else if (message.content.startsWith("/m-")) {
