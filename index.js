@@ -204,6 +204,7 @@ let chickenji = [
 // ]
 let pass = __dirname
 let json1 = require(pass + '/component.json')
+let testlength = Object.keys(json1).length
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
@@ -609,12 +610,12 @@ uuid単体生成は/uだよ
   }
 
   }else if (message.content.startsWith("/")) {
-    message.channel.send(json1.test.value)
-    // for(let co = 0;co < component.length;co ++){
-    //   let com = message.content.replace("/","")
-    //   if(com == ""){
+    message.channel.send(testlength)
+    // for(let co = 0;co < Object.keys(json1).length;co ++){
+    //   let command = message.content.replace("/","")
+    //   if(coomand == ""){
     //     return;
-    //   }else if(component[co].name.match(com)){
+    //   }else if(json1[co].name.match(com)){
     //     message.channel.send("```\n" + component[co]["value"] + "```")
     //   }
     // }
