@@ -607,8 +607,8 @@ uuid単体生成は/uだよ
   }
 
   }else if (message.content.startsWith("/")) {
+    let com = message.content.replace("/","")
     for(let co = 0;co < component.length;co ++){
-      let com = message.content.replace("/","")
       if(com == ""){
         return;
       }else if(component[co].name.match(com)){
