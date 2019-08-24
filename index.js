@@ -204,7 +204,7 @@ let chickenji = [
 // ]
 let pass = __dirname
 let component = require(pass + '/component.json')
-let comlength = Object.keys(json1).length
+let comlength = Object.keys(component).length
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
