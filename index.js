@@ -465,7 +465,7 @@ uuid単体生成は/uだよ
   }
 
   }else if (message.content.startsWith("/")) {
-    message.channel.send(component[0].name)
+    message.channel.send(Object.keys(component)[0])
     // for(let select = 0;select < comlength;co ++){
     //   let command = message.content.replace("/","")
     //   if(command == ""){
