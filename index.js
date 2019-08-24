@@ -609,7 +609,7 @@ uuid単体生成は/uだよ
   }
 
   }else if (message.content.startsWith("/")) {
-    message.channel.send(json1)
+    message.channel.send(json1.test.name)
     // for(let co = 0;co < component.length;co ++){
     //   let com = message.content.replace("/","")
     //   if(com == ""){
