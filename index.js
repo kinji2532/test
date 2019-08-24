@@ -608,6 +608,7 @@ uuid単体生成は/uだよ
 
   }else if (message.content.startsWith("/")) {
     let com = message.content.replace("/","").split(" ")
+    message.channel.send(com)
     for(let co = 0;co < component.length;co ++){
       if(com == ""){
         return;
