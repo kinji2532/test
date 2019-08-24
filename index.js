@@ -614,7 +614,7 @@ uuid単体生成は/uだよ
       let command = message.content.replace("/","")
       if(command == ""){
         return;
-      }else if(component[select].match(command)){
+      }else if(component["select"].match(command)){
         message.channel.send("```\n" + component[select]["value"] + "```")
       }
     }
