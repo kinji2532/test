@@ -610,17 +610,15 @@ uuid単体生成は/uだよ
   }
 
   }else if (message.content.startsWith("/")) {
-    for(let select = 0;select < comlength;co ++){
-      let command = message.content.replace("/","")
-      if(command == ""){
-        return;
-      }else{
-        message.channel.send(component[select])
-      }
-      // }else if(component[select].match(command)){
-      //   message.channel.send("```\n" + component[select]["value"] + "```")
-      // }
-    }
+    message.channel.send(component[0])
+    // for(let select = 0;select < comlength;co ++){
+    //   let command = message.content.replace("/","")
+    //   if(command == ""){
+    //     return;
+    //   }else if(component[select].match(command)){
+    //     message.channel.send("```\n" + component[select]["value"] + "```")
+    //   }
+    // }
   }else{
   let random = Math.floor(Math.random() * 5);
   if (random == 0){
