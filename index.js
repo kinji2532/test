@@ -443,7 +443,7 @@ client.on('message', message => {
     message.channel.send(uuid());
   }else if (message.content === "ちきんじ"　|| message.content === "チキンジ") {
     let randoms = Math.floor(Math.random() * 100)
-    if (randoms == 0){
+    if (randoms >= 95){
       randoms = Math.floor(Math.random() * Object.keys(chickenji).length)
       message.channel.send(chickenji.rare[randoms])
     }else{
