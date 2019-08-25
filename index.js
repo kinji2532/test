@@ -4,59 +4,6 @@ let one;
 let two;
 let saymode = true;
 let dummy;
-let chickenji = [
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "ちきんじいうなし( 'ω')",
-  "じー",
-  "",
-  "べーだ",
-  "( 'ω')",
-  "...",
-  "へーあなたのこと見損ないました",
-  "あ、そういうこと言っちゃうんですかー？",
-  "ふんだ",
-  "もー",
-  "そういうこと言う人きらいです",
-  "ばーかばーか"
-]
 let component = [
   {
     "name":"minecraft:behavior.avoid_mob_type",
@@ -202,7 +149,10 @@ let component = [
     "value": ``
   }
 ]
-let json = __dirname
+let pass = __dirname
+let status = require(pass + '/status.json')
+let chickenji = require(pass + '/chickenji.json')
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity('れきゅねこ教',{
@@ -492,8 +442,13 @@ client.on('message', message => {
   }else if (message.content === '/u') {
     message.channel.send(uuid());
   }else if (message.content === "ちきんじ"　|| message.content === "チキンジ") {
-    let randoms = Math.floor(Math.random() * chickenji.length)
-    message.channel.send(chickenji[randoms]);
+    let randoms = Math.floor(Math.random() * 100)
+    if (randoms == 0){
+      randoms = Math.floor(Math.random() * Object.keys(chickenji).length)
+      message.channel.send(chickenji.rare[randoms])
+    }else{
+      message.channel.send(chickenji.normal);
+    }
   }else if (message.content === "れきゅ") {
   message.channel.send("よんだ？");
   }else if (message.content.match("おはよ")) {
