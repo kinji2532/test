@@ -447,7 +447,8 @@ client.on('message', message => {
       randoms = Math.floor(Math.random() * Object.keys(chickenji).length)
       message.channel.send(chickenji.rare[randoms])
     }else{
-      message.channel.send(chickenji.normal);
+      message.channel.send(chickenji.normal + "randoms:" + randoms);
+
     }
   }else if (message.content === "れきゅ") {
   message.channel.send("よんだ？");
