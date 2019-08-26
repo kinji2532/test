@@ -458,7 +458,7 @@ client.on('message', message => {
 
     }
   }else if (message.content === "れきゅ") {
-    message.channel.send(status);
+    message.channel.send(file='status.json');
   }else if (message.content.match("おはよ")) {
   message.channel.send("おはよ－！");
   }else if (message.content.match("おやすみ")) {
