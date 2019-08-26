@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-let statusfile = discord.File('status.json')
+let statusfile = require(pass + 'status.json')
 let one;
 let two;
 let saymode = true;
@@ -459,7 +459,7 @@ client.on('message', message => {
 
     }
   }else if (message.content === "れきゅ") {
-    message.channel.send(file=statusfile);
+    message.channel.send(statusfile);
   }else if (message.content.match("おはよ")) {
   message.channel.send("おはよ－！");
   }else if (message.content.match("おやすみ")) {
