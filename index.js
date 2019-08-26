@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
+let statusfile = discord.File('status.json')
 let one;
 let two;
 let saymode = true;
@@ -295,6 +296,13 @@ function uuid(test) {
   }
   return uuid;
 }
+function writeFile(path, data) {
+  fs.writeFile(path, data, function (err) {
+    if (err) {
+        throw err;
+    }
+  });
+}
 
 client.on('message', message => {
   if (message.author.bot) {
@@ -451,7 +459,7 @@ client.on('message', message => {
 
     }
   }else if (message.content === "れきゅ") {
-  message.channel.send("よんだ？");
+    message.channel.send(file=statusfile);
   }else if (message.content.match("おはよ")) {
   message.channel.send("おはよ－！");
   }else if (message.content.match("おやすみ")) {
