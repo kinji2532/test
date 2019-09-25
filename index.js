@@ -300,7 +300,7 @@ function uuid(test){
 }
 function file(name){
   const attachment = new Attachment('/app/' + name);
-  return attachment;
+  return message.channel,send(attachment);
 }
 
 client.on('message', message => {
@@ -367,7 +367,7 @@ client.on('message', message => {
       for(let f = 3; f < command.length;f ++){
         command[1] = command[1] + " " + command[f]
       }
-      let remote = command[1];
+      let remote = JSON.parse(command[1]);
       fs.writeFile( "./status.json" ,JSON.stringify(remote,null,2),(err) => {
         if(err){
           message.channel.send(err)
