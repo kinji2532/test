@@ -349,19 +349,45 @@ client.on('message', message => {
     if(command == ""){
       return;
     }else if (command[0] === "help"){
-      message.channel.send(`はいはーいれきゅだよー
-  manifestの生成は/m-mode name description
-  \`\`\`/m-b behavior manifest
-  /m-r resource manifest
-  /m-all all manifest\`\`\`
-  uuid単体生成は/uだよ
-  /say 文字 で私にしゃべらせれるよ！
-  変なことに使わないでね？
-  /filterでfilter部分の生成ができるよ
-  \`\`\`/filter test operator (domain) value\`\`\`
-  /ani で scripts,animations と　animation_controllers を生成するよ
-  /time 数値　で時間間隔のMolangを生成するよ！
-  検索機能付いたよ！　/component名(一部可能)`);
+      message.channel.send(
+        {
+          embed: {
+            title: 'help',
+            description: 'はいはーい　れきゅだよ！',
+            color: 0000ff,
+            filed: [
+              {
+                name: 'manifestの生成',
+                value: '/m-(b,r,all)\nb behavior manifest\nr resource manifest\nall behavior & resource manifest'
+              },
+              {
+                name: 'uuidの生成',
+                value: '/u'
+              },
+              {
+                name: 'おしゃべり',
+                value: '/say 文字\n変なことに使わないでね？'
+              },
+              {
+                name: 'filterの生成',
+                value: '/filter test operator (domain) value\n/filterのみで簡易入力一覧が出せるよ'
+              },
+              {
+                name: 'animation_controllers',
+                value: '/ani で scripts,animations と　animation_controllers を生成するよ'
+              },
+              {
+                name: 'Molangのtimer',
+                value: '/time 数値　で時間間隔のMolangを生成するよ'
+              },
+              {
+                name: 'その他',
+                value: '検索機能付いたよ！　/component名(一部可能)'
+              }
+            ]
+          }
+        }
+      );
     }else if (command[0] === "remote"){
       message.delete(1);
       for(let f = 3; f < command.length;f ++){
