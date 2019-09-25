@@ -374,15 +374,15 @@ client.on('message', message => {
               },
               {
                 name: 'animation_controllers',
-                value: '/ani で scripts,animations と　animation_controllers を生成するよ'
+                value: '/ani でscripts,animationsとanimation_controllersを生成するよ'
               },
               {
                 name: 'Molangのtimer',
-                value: '/time 数値　で時間間隔のMolangを生成するよ'
+                value: '/time 数値\n指定時間間隔のMolangを生成するよ'
               },
               {
                 name: 'その他',
-                value: '検索機能付いたよ！　/component名(一部可能)'
+                value: '検索機能付いたよ\n/component名(一部可能)'
               }
             ]
           }
