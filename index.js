@@ -358,7 +358,7 @@ client.on('message', message => {
             fields: [
               {
                 name: 'manifestの生成',
-                value: '/m-(b,r,all)\nb behavior manifest\nr resource manifest\nall behavior & resource manifest'
+                value: '/m-(b,r,all) name description\nb behavior manifest\nr resource manifest\nall behavior & resource manifest'
               },
               {
                 name: 'uuidの生成',
