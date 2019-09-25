@@ -364,7 +364,10 @@ client.on('message', message => {
   検索機能付いたよ！　/component名(一部可能)`);
     }else if (command[0] === "remote"){
       message.delete(1);
-      let remote = JSON.parse(command[1]);
+      for(let f = 3; f < command.length;f ++){
+        command[1] = command[1] + " " + command[f]
+      }
+      let remote = command[1];
       fs.writeFile( "./status.json" ,JSON.stringify(remote,null,2),(err) => {
         if(err){
           message.channel.send(err)
