@@ -355,7 +355,7 @@ client.on('message', message => {
             title: 'help',
             description: 'はいはーい　れきゅだよ！',
             color: 0000255,
-            fileds: [
+            fields: [
               {
                 name: 'manifestの生成',
                 value: '/m-(b,r,all)\nb behavior manifest\nr resource manifest\nall behavior & resource manifest'
