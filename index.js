@@ -354,7 +354,7 @@ client.on('message', message => {
           embed: {
             title: 'help',
             description: 'はいはーい　れきゅだよ！',
-            color: 0000ff,
+            color: 0000255,
             filed: [
               {
                 name: 'manifestの生成',
