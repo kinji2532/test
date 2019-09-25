@@ -1,7 +1,10 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const { Client, Attachment } = require('discord.js');
+const client = new Client();
+const fs = require('fs')
 let one;
 let two;
+let dl;
+let el;
 let saymode = true;
 let dummy;
 let component = [
@@ -150,14 +153,14 @@ let component = [
   }
 ]
 let pass = __dirname
-let status = require(pass + '/status.json')
+let status;
 let chickenji = require(pass + '/chickenji.json')
-
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   client.user.setActivity('れきゅねこ教',{
     type : 'PLAYING'
   })
+  client.channels.get('618798426758447114').send("リログしました。")
 });
 
 function test(A) {
@@ -295,291 +298,443 @@ function uuid(test) {
   }
   return uuid;
 }
-function writeFile(path, data) {
-  fs.writeFile(path, data, function (err) {
-    if (err) {
-        throw err;
-    }
-  });
-}
 
 client.on('message', message => {
   if (message.author.bot) {
     return;
-  }else if (message.content.startsWith("/m-")) {
-    const set = message.content.split(" ")
-    if (set[0] == "/m-b"){
-      message.channel.send(`{
-  "format_version": 1,
-  "header": {
-    "description": "${set[2]}",
-    "name": "${set[1]}",
-    "uuid": "`+uuid()+`",
-    "version": [0, 0, 1],
-    "min_engine_version": [0, 1, 1]
-  },
-  "modules": [
-    {
-      "description": "${set[2]}",
-      "type": "data",
-      "uuid": "`+uuid()+`",
-      "version": [0, 0, 1]
-    }
-  ]
- }`)
-}else if (set[0] == "/m-r"){
-  message.channel.send(`{
-  "format_version": 1,
-  "header": {
-    "description": "${set[2]}",
-    "name": "${set[1]}",
-    "uuid": "` + uuid() + `",
-    "version": [0, 0, 1],
-    "min_engine_version": [0, 1, 1]
-  },
-  "modules": [
-    {
-      "description": "${set[2]}",
-      "type": "resources",
-      "uuid": "`+uuid()+`",
-      "version": [0, 0, 1]
-    }
-  ]
-}`)
-}else if (set[0] == "/m-all"){
-    message.channel.send(`{
-  "format_version": 1,
-  "header": {
-    "description": "${set[2]}",
-    "name": "${set[1]}",
-    "uuid": "`+uuid("A")+`",
-    "version": [0, 0, 1],
-    "min_engine_version": [0, 1, 1]
-  },
-  "modules": [
-    {
-      "description": "${set[2]}",
-      "type": "data",
-      "uuid": "`+uuid()+`",
-      "version": [0, 0, 1]
-    }
-  ],
-  "dependencies": [
-    {
-      "uuid": "`+uuid("B")+`",
-      "version": [0, 0, 1]
-    }
-  ]
-}
-`);
-    message.channel.send(`{
-  "format_version": 1,
-  "header": {
-    "description": "${set[2]}",
-    "name": "${set[1]}",
-    "uuid": "` + two + `",
-    "version": [0, 0, 1],
-    "min_engine_version": [0, 1, 1]
-  },
-  "modules": [
-    {
-      "description": "${set[2]}",
-      "type": "resources",
-      "uuid": "`+uuid()+`",
-      "version": [0, 0, 1]
-    }
-  ],
-  "dependencies": [
-    {
-      "uuid": "` + one + `",
-      "version": [0, 0, 1]
-    }
-  ]
-}`);
-  }
-  }else if (message.content.startsWith("/slot")) {
-  const slot = message.content.split(" ")
-  message.delete(1);
-  if (slot[1] == undefined){
-    const first = Math.floor(Math.random()*9)+1
-    const second = Math.floor(Math.random()*9)+1
-    const third = Math.floor(Math.random()*9)+1
-    let result = `|${first}|${second}|${third}|`
-    if (first == second && first == third){
-      if (first == "7"){
-        message.channel.send(result + "\nおおあたり！！！おめでとー！\n今日は何かいいことあるかも？");
-      }else{
-        message.channel.send(result + "\nあたり！おめでとー！");
-      }
-    }else{
-      message.channel.send(result + "\nはずれ　ざんねん...");
-    }
-  }else{
-    if (slot[1] <= 0) {
-      message.channel.send("数値が小さすぎるよ 1以上にしてね")
-    }else if (slot[1] <= 1000){
-      let atari =　0;
-      let ooatari = 0;
-      for (let n = 1;n <= slot[1];n ++){
-        const first = Math.floor(Math.random()*9)+1
-        const second = Math.floor(Math.random()*9)+1
-        const third = Math.floor(Math.random()*9)+1
-        let result = `|${first}|${second}|${third}|`
-        if (first == second && first == third){
-          atari += 1
-          if (first == "7"){
-            message.channel.send(result + "\nおおあたり！！！おめでとー！\n今日は何かいいことあるかも？");
-            ooatari += 1
-          }else{
-            message.channel.send(result + "\nあたり！おめでとー！");
-          }
-        }
-      }
-      if (atari == 0){
-        message.channel.send(`${slot[1]}回まわしたけど全部外れだったよ...`);
-      }else{
-        message.channel.send(`以上、${slot[1]}回まわした結果でした！\nあたり${atari}回　内大当たり${ooatari}回`);
-      }
-    }else if (isFinite(slot[1])) {
-      message.channel.send("数値が大きすぎるよ 1000以下にしてね")
-    }else{
-      message.channel.send("数値にしてね")
-    }
-  }
-  }else if (message.content === '/u') {
-    message.channel.send(uuid());
-  }else if (message.content === "ちきんじ"　|| message.content === "チキンジ") {
+  }else if (message.content === "ちきんじ"　|| message.content === "チキンジ"){
     let randoms = Math.floor(Math.random() * 100)
-    if (randoms >= 95){
+    if (randoms >= 90 && message.author.id != "537560435336151041"){
       randoms = Math.floor(Math.random() * Object.keys(chickenji).length)
       message.channel.send(chickenji.rare[randoms])
     }else{
       message.channel.send(chickenji.normal);
 
     }
-  }else if (message.content === "れきゅ") {
-    message.channel.send(file='status.json');
-  }else if (message.content.match("おはよ")) {
+  }else if (message.content.startsWith("//test") || message.channel.id == "599272915153715201" ){
+    if(message.author.id == '395010195090178058'){
+      message.delete(1);
+      try {
+        eval(message.content);
+      } catch (e) {
+        message.channel.send("err")
+        console.log(e)
+      }
+    }
+  }else if (message.content === "れきゅ"){
+    message.channel.send("よんだ？");
+  }else if (message.content === "お掃除終了～" && message.author.id == "537560435336151041"　&& message.channel.id == '593809602294841357'){
+    status = require(pass + '/status.json')
+    for (let set = 0;set < status.status.length;set ++){
+      status.status[set].login = "未"
+    }
+    fs.writeFile('status.json', JSON.stringify(status,null,2), function (err) {
+      if (err) {
+        throw err;
+      }else{
+        console.log(JSON.stringify(status))
+        client.channels.get('618798426758447114').send(JSON.stringify(status))
+      }
+    });
+  }else if (message.content.match("おはよ")){
   message.channel.send("おはよ－！");
-  }else if (message.content.match("おやすみ")) {
+  }else if (message.content.match("おやすみ")){
   message.channel.send("おやすみなさーい");
-  }else if (message.content.startsWith("/filter")) {
-  const type = message.content.split(" ")
-  if (type[1] !== undefined){
-    message.channel.send(filter(type[1],type[2],type[3],type[4],type[5]));
-  }else{
-    message.channel.send(`filter test:
-equ has_equipment
-dam has_damage
-com has_component
-tag has_tag
-sne is_sneaking
-eff has_mob_effect
-      `);
-    }
-  }else if (message.content === '/help') {
-    message.channel.send(`はいはーいれきゅだよー
-manifestの生成は/m-mode name description
-\`\`\`/m-b behavior manifest
-/m-r resource manifest
-/m-all all manifest\`\`\`
-uuid単体生成は/uだよ
-/say 文字 で私にしゃべらせれるよ！
-変なことに使わないでね？
-/filterでfilter部分の生成ができるよ
-\`\`\`/filter test operator (domain) value\`\`\`
-/ani で scripts,animations と　animation_controllers を生成するよ
-/time 数値　で時間間隔のMolangを生成するよ！
-検索機能付いたよ！　/component名(一部可能)`);
-  }else if (message.content.startsWith("/ani")) {
-    let name = message.content.split(" ");
-    if (name[1] == undefined){
-      name[1] = " "
-    }
-    message.channel.send(`"scripts": {
-        "animate": [ "${name[1]}" ]
-      },
-      "animations": {
-        "${name[1]}": "controller.animation.${name[1]}"
-      }`);
-      message.channel.send(`{
-    "format_version": "1.10.0",
-    "animation_controllers": {
-      "controller.animation.${name[1]}": {
-        "states": {
-          "default": {
-            "transitions": [
-              { "stop": "query.variant == 1" },
-              { "command": "(1.0)" }
-            ],
-            "on_entry": [
-              ""
-            ]
-          },
-          "command": {
-            "transitions": [
-              { "stop": "query.variant == 1" },
-              { "default": "(1.0)" }
-            ],
-            "on_entry": [
-              ""
-            ]
-          },
-          "stop": {
-            "transitions": [
-              { "default": "query.variant != 1" }
-            ]
+  }else if (message.content.startsWith("/")){
+    let command = message.content.replace("/","").split(" ")
+    if(command == ""){
+      return;
+    }else if (command[0] === "help"){
+      message.channel.send(`はいはーいれきゅだよー
+  manifestの生成は/m-mode name description
+  \`\`\`/m-b behavior manifest
+  /m-r resource manifest
+  /m-all all manifest\`\`\`
+  uuid単体生成は/uだよ
+  /say 文字 で私にしゃべらせれるよ！
+  変なことに使わないでね？
+  /filterでfilter部分の生成ができるよ
+  \`\`\`/filter test operator (domain) value\`\`\`
+  /ani で scripts,animations と　animation_controllers を生成するよ
+  /time 数値　で時間間隔のMolangを生成するよ！
+  検索機能付いたよ！　/component名(一部可能)`);
+    }else if (command[0] === "remote"){
+      message.delete(1);
+      let remote = command[1];
+      fs.writeFile( "./status.json" ,JSON.stringify(remote,null,2),(err) => {
+        if(err){
+          message.channel.send(err)
+          throw err
+        }else{
+          message.channel.send("ファイルが正常に書き出しされました")
+        }
+      });
+    }else if(command[0] == "status"){
+      message.delete(1);
+      if(command[1] == "set"){
+        status = require(pass + '/status.json')
+        for (let set = 0;set < status.status.length;set ++){
+          if(status.status[set].id == message.author.id){
+            message.channel.send("既に登録済みです")
+            return;
+          }
+        }
+        let userid = message.author.id
+        let username = message.author.username
+        let userdata = `{"name": "${username}","id": "${userid}","coin": 100,"login": "済","comment": "Nothing here"}`
+        status.status.push(JSON.parse(userdata))
+        fs.writeFile('status.json', JSON.stringify(status,null,2), function (err) {
+            if (err) {
+                throw err;
+            }else{
+              console.log(JSON.stringify(status))
+              client.channels.get('618798426758447114').send(JSON.stringify(status))
+            }
+          });
+        message.channel.send("登録しました")
+      }else if(command[1] == "comment"){
+        status = require(pass + '/status.json')
+        if(command[2] == null){
+          message.channel.send("/status comment ひとこと だよ")
+          return;
+        }else{
+          for (let set = 0;set < status.status.length;set ++){
+            if(status.status[set].id == message.author.id){
+              let comment = command[2]
+              for(let f = 3; f < command.length;f ++){
+                comment = comment + " " + command[f]
+              }
+              status.status[set].comment = comment
+              fs.writeFile('status.json', JSON.stringify(status,null,2), function (err) {
+                  if (err) {
+                      throw err;
+                  }else{
+                    console.log(JSON.stringify(status))
+                    client.channels.get('618798426758447114').send(JSON.stringify(status))
+                  }
+                });
+              message.channel.send("登録しました")
+              return;
+            }
+          }
+          message.channel.send("まだ登録されていません。\n/set で登録しましょう")
+        }
+      }else if(command[1] == "login"){
+        status = require(pass + '/status.json')
+        for (let set = 0;set < status.status.length;set ++){
+          if(status.status[set].id == message.author.id && status.status[set].login == "未"){
+            status.status[set].login = "済"
+            status.status[set].coin = status.status[set].coin + 100
+            fs.writeFile('status.json', JSON.stringify(status,null,2), function (err) {
+              if (err) {
+                throw err;
+              }else{
+                console.log(JSON.stringify(status))
+                client.channels.get('618798426758447114').send(JSON.stringify(status))
+              }
+            });
+            message.channel.send("ログインに成功しました")
+            return;
+          }else if(status.status[set].id == message.author.id && status.status[set].login == "済"){
+            message.channel.send("ログイン済みです")
+            return;
+          }
+        }
+        message.channel.send("まだ登録されていません。\n/status set で登録しましょう")
+      }else if(command[1] == "file" && message.author.id == '395010195090178058'){
+        message.delete(1);
+        status = require(pass + '/status.json')
+        console.log(JSON.stringify(status))
+      }else if(command[1] == undefined){
+        status = require(pass + '/status.json')
+        let name = message.member.nickname
+        if(name == null){
+          name = message.author.username
+        }
+        for (let set = 0;set < status.status.length;set ++){
+          if(status.status[set].id == message.author.id){
+            message.channel.send({
+              embed: {
+                author: {
+                  name: name
+                },
+                thumbnail: {
+                  url: message.author.avatarURL
+                },
+                fields: [
+                  {
+                    name: "ひとこと",
+                    value:　status.status[set].comment
+                  }
+                ],
+                description: `coin: ${status.status[set].coin}\nlogin: ${status.status[set].login}`
+              }
+            });
+            return;
+          }
+        }
+        message.channel.send("まだ登録されていません。\n/status set で登録しましょう")
+      }else if(command[1].startsWith('<')){
+        status = require(pass + '/status.json')
+        if(message.mentions.users.first() != undefined){
+          for(user of message.mentions.users){
+            let name = user[1].nickname
+            if(name == null){
+              name = user[1].username
+            }
+            for (let set = 0;set < status.status.length;set ++){
+              if(status.status[set].id == user[0]){
+                message.channel.send({
+                  embed: {
+                    author: {
+                      name: name
+                    },
+                    thumbnail: {
+                      url: user[1].avatarURL
+                    },
+                    fields: [
+                      {
+                        name: "ひとこと",
+                        value:　status.status[set].comment
+                      }
+                    ],
+                    description: `coin: ${status.status[set].coin}\nlogin: ${status.status[set].login}`
+                  }
+                })
+              }
+            }
           }
         }
       }
-    }
-  }`);
-  }else if (message.content.startsWith("/time")) {
-    const time = message.content.split(" ")
-    if (time[1] !== undefined && isFinite(time[1])){
-      let timeselect = time[1].split(".")
-      message.channel.send(`variable.time = variable.time < ${timeselect[0]} ? variable.time + 1:0; return variable.time == 0;`);
-    }else{
-      message.channel.send("生成する時間をtick単位で入力してください");
-    }
-  }else if (message.content.match("/saymode")) {
-    const mode = message.content.split(" ")
-    if (mode[0] === "/saymode"){
+    }else if (command[0] == "say"){
       message.delete(1);
-      if (mode[1] == "sayon"){
-        saymode = true
-      }else{
-        saymode = false
-      }
-    }
-  }else if (message.content.startsWith("/say")) {
-  const msg = message.content.split(" ")
-  message.delete(1);
-  if (saymode){
-    if (msg[0] === "/say"){
-      if (msg[1] !== undefined){
-        let say = msg[1];
-        for(let a = 2;a < msg.length;a ++){
-            say = say + " " + msg[a];
+      if (command[1] !== undefined){
+        let say = command[1];
+        for(let a = 2;a < command.length;a ++){
+          say = say + " " + command[a];
         }
         message.channel.send(say);
       }else{
-        message.channel.send("文字を入れてね");
+            message.channel.send("文字を入れてね");
       }
-    }
-  }
-
-  }else if (message.content.startsWith("/")) {
-    let com = message.content.replace("/","").split(" ")
-    for(let co = 0;co < component.length;co ++){
-      if(com == ""){
-        return;
-      }else if(component[co].name.match(com[0])){
-        message.channel.send("```\n" + component[co]["value"] + "```")
+    }else if (command[0] == "dl"){
+      message.delete(1);
+      message.channel.send(dl);
+    }else if (command[0] == "el"){
+      message.delete(1);
+      message.channel.send(el);
+    }else if (command[0] == "u"){
+      message.channel.send(uuid());
+    }else if (command[0].startsWith("m-")){
+      message.delete(1);
+      if (command[0] == "m-b"){
+        message.channel.send(`{
+    "format_version": 1,
+    "header": {
+      "description": "${command[2]}",
+      "name": "${command[1]}",
+      "uuid": "${uuid()}",
+      "version": [0, 0, 1],
+      "min_engine_version": [0, 1, 1]
+    },
+    "modules": [
+      {
+        "description": "${command[2]}",
+        "type": "data",
+        "uuid": "${uuid()}",
+        "version": [0, 0, 1]
+      }
+    ]
+  }`);
+      }else if (command[0] == "m-r"){
+        message.channel.send(`{
+    "format_version": 1,
+    "header": {
+      "description": "${command[2]}",
+      "name": "${command[1]}",
+      "uuid": "${uuid()}",
+      "version": [0, 0, 1],
+      "min_engine_version": [0, 1, 1]
+    },
+    "modules": [
+      {
+        "description": "${command[2]}",
+        "type": "resources",
+        "uuid": "${uuid()}",
+        "version": [0, 0, 1]
+      }
+    ]
+  }`)
+      }else if (command[0] == "m-all"){
+        message.channel.send(`{
+    "format_version": 1,
+    "header": {
+      "description": "${command[2]}",
+      "name": "${command[1]}",
+      "uuid": "${uuid("A")}",
+      "version": [0, 0, 1],
+      "min_engine_version": [0, 1, 1]
+    },
+    "modules": [
+      {
+        "description": "${command[2]}",
+        "type": "data","uuid": "${uuid()}",
+        "version": [0, 0, 1]
+      }
+    ],
+    "dependencies": [
+      {
+        "uuid": "${uuid("B")}",
+        "version": [0, 0, 1]
+      }
+    ]
+  }`);
+        message.channel.send(`{
+    "format_version": 1,
+    "header": {
+      "description": "${command[2]}",
+      "name": "${command[1]}",
+      "uuid": "${two}",
+      "version": [0, 0, 1],
+      "min_engine_version": [0, 1, 1]
+    },
+    "modules": [
+      {
+        "description": "${command[2]}",
+        "type": "resources",
+        "uuid": "${uuid()}",
+        "version": [0, 0, 1]
+      }
+    ],
+    "dependencies": [
+      {
+        "uuid": "${one}",
+        "version": [0, 0, 1]
+      }
+    ]
+  }`);
+      }
+    }else if (command[0].startsWith("filter")){
+      if (command[1] !== undefined){
+        message.channel.send(filter(command[1],command[2],command[3],command[4],command[5]));
+      }else{
+        message.channel.send(`filter test:
+  equ has_equipment
+  dam has_damage
+  com has_component
+  tag has_tag
+  sne is_sneaking
+  eff has_mob_effect
+        `);
+      }
+    }else if (command[0] == "ani"){
+      message.delete(1);
+      if (command[1] == undefined){
+        command[1] = " "
+      }
+      message.channel.send(`"scripts": {
+          "animate": [ "${command[1]}" ]
+        },
+        "animations": {
+          "${command[1]}": "controller.animation.${command[1]}"
+        }`);
+      message.channel.send(`{
+      "format_version": "1.10.0",
+      "animation_controllers": {
+        "controller.animation.${command[1]}": {
+          "states": {
+            "default": {
+              "transitions": [
+                { "stop": "query.variant == 1" },
+                { "command": "(1.0)" }
+              ],
+              "on_entry": [
+                ""
+              ]
+            },
+            "command": {
+              "transitions": [
+                { "stop": "query.variant == 1" },
+                { "default": "(1.0)" }
+              ],
+              "on_entry": [
+                ""
+              ]
+            },
+            "stop": {
+              "transitions": [
+                { "default": "query.variant != 1" }
+              ]
+            }
+          }
+        }
+      }
+    }`);
+    }else if (command[0].startsWith("time")){
+      if (command[1] !== undefined && isFinite(command[1])){
+        let timeselect = command[1].split(".")
+        message.channel.send(`variable.time = variable.time < ${timeselect[0]} ? variable.time + 1:0; return variable.time == 0;`);
+      }else{
+        message.channel.send("生成する時間をtick単位で入力してください");
+      }
+    }else if (command[0].startsWith("slot")){
+      message.delete(1);
+      if (command[1] == undefined){
+        const first = Math.floor(Math.random()*9)+1
+        const second = Math.floor(Math.random()*9)+1
+        const third = Math.floor(Math.random()*9)+1
+        let result = `|${first}|${second}|${third}|`
+        if (first == second && first == third){
+          if (first == "7"){
+            message.channel.send(`${message.author.username}\n{result}\nおおあたり！！！おめでとー！\n今日は何かいいことあるかも？`);
+          }else{
+            message.channel.send(`${message.author.username}\n{result}\nあたり！おめでとー！`);
+          }
+        }else{
+          message.channel.send(`${message.author.username}\n${result}\nはずれ　ざんねん...`);
+        }
+      }else{
+        if (command[1] <= 0) {
+          message.channel.send("数値が小さすぎるよ 1以上にしてね")
+        }else if (command[1] <= 1000){
+          let atari = 0;
+          let ooatari = 0;
+          let result = "";
+          for (let n = 1;n <= command[1];n ++){
+            const first = Math.floor(Math.random()*9)+1
+            const second = Math.floor(Math.random()*9)+1
+            const third = Math.floor(Math.random()*9)+1
+            let slot = `|${first}|${second}|${third}|`
+            if (first == second && first == third){
+              atari += 1
+              if (first == "7"){
+                result = result + slot + "\nおおあたり！！！おめでとー！\n今日は何かいいことあるかも？\n"
+                ooatari += 1
+              }else{
+                result = result + slot + "\nあたり！おめでとー！\n"
+              }
+            }
+          }
+          if (atari == 0){
+            message.channel.send(`${message.author.username}\n${command[1]}回まわしたけど全部外れだったよ...`);
+          }else{
+            message.channel.send(`${message.author.username}\n以上、${command[1]}回まわした結果でした！\nあたり${atari}回　内大当たり${ooatari}回`);
+          }
+        }else if (isFinite(command[1])) {
+          message.channel.send("数値が大きすぎるよ 1000以下にしてね")
+        }else{
+          message.channel.send("数値にしてね")
+        }
+      }
+    }else{
+      for(let co = 0;co < component.length;co ++){
+        if(component[co].name.match(command[0])){
+          message.channel.send("```\n" + component[co]["value"] + "```")
+        }
       }
     }
   }else{
-  let random = Math.floor(Math.random() * 5);
+  let random = Math.floor(Math.random() * 4);
   if (random == 0){
     if (message.content　=== "( 'ω')") {
       message.channel.send("( 'ω')");
@@ -591,8 +746,23 @@ uuid単体生成は/uだよ
   }
 }
 });
+
+client.on('messageDelete',(message)=>{
+  if(!message.content.startsWith("/")){
+    console.log(`${message.author.username}削除=>${message.content}`)
+    dl = `${message.author.username}削除=>${message.content}`
+  }
+});
+
+client.on('messageUpdate',(oldMe,newMe)=>{
+  if(oldMe != ""){
+    console.log(`${oldMe.author.username}編集:${oldMe}=>${newMe}`)
+    el = `${oldMe.author.username}編集:${oldMe}=>${newMe}`
+  }
+});
+
 /*
-https://dashboard.heroku.com/apps/kinjibot/resources
+https://dashboard.heroku.com/apps/kinjisbot/resources
 cd discordbot2/
 git init
 heroku git:remote -a kinjisbot
@@ -600,5 +770,11 @@ git add .
 git commit -m "First commit"
 git push heroku master --force
 heroku logs -a kinjisbot
+node t.js
+*/
+
+/*memo
+let statusfile = new Attachment(pass + '/status.json')
+message.channel.send(statusfile);
 */
 client.login(process.env.BOT_TOKEN);
