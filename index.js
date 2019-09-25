@@ -163,7 +163,7 @@ client.on('ready', () => {
   client.channels.get('618798426758447114').send("リログしました。")
 });
 
-function test(A) {
+function test(A){
   if (A == "equ"){
     return "has_equipment"
   }else if (A == "dam"){
@@ -180,7 +180,7 @@ function test(A) {
     return A
   }
 }
-function operator(A) {
+function operator(A){
   if (A == "="){
     return "==";
   }else if (A == "!"){
@@ -191,7 +191,7 @@ function operator(A) {
     return A
   }
 }
-function value(A) {
+function value(A){
   if (A == undefined){
     return " ";
   }else {
@@ -282,7 +282,7 @@ function filter(A,B,C,D,E){
     }
   }
 }
-function uuid(test) {
+function uuid(test){
   var uuid = "", i, random;
   for (i = 0; i < 32; i++) {
     random = Math.random() * 16 | 0;
@@ -298,9 +298,13 @@ function uuid(test) {
   }
   return uuid;
 }
+function file(name){
+  const attachment = new Attachment('/app/' + name);
+  return attachment;
+}
 
 client.on('message', message => {
-  if (message.author.bot) {
+  if (message.author.bot){
     return;
   }else if (message.content === "ちきんじ"　|| message.content === "チキンジ"){
     let randoms = Math.floor(Math.random() * 100)
@@ -360,7 +364,7 @@ client.on('message', message => {
   検索機能付いたよ！　/component名(一部可能)`);
     }else if (command[0] === "remote"){
       message.delete(1);
-      let remote = command[1];
+      let remote = JSON.parse(command[1]);
       fs.writeFile( "./status.json" ,JSON.stringify(remote,null,2),(err) => {
         if(err){
           message.channel.send(err)
