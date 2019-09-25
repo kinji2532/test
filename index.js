@@ -298,9 +298,9 @@ function uuid(test){
   }
   return uuid;
 }
-function file(name,message){
+function file(name){
   const attachment = new Attachment('/app/' + name);
-  message.channel,send(attachment);
+  return attachment;
 }
 
 client.on('message', message => {
