@@ -759,7 +759,7 @@ client.on('message', message => {
           message.channel.send("数値にしてね")
         }
       }
-    }else if(command[0] == "search"){
+    }else if(command[0] == "search" || command[0] == "s"){
       for(let co = 0;co < component.length;co ++){
         if(component[co].name.match(command[1])){
           message.channel.send("```\n" + component[co]["value"] + "```")
