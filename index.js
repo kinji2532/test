@@ -511,7 +511,7 @@ client.on('message', message => {
         status = require(pass + '/status.json')
         if(message.mentions.users.first() != undefined){
           for(user of message.mentions.users){
-            let name = user[1].nickname
+            let name = message.guild.members.get(user[1].id).nickname
             if(name == null){
               name = user[1].username
             }
