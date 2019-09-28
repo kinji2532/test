@@ -382,7 +382,7 @@ client.on('message', message => {
               },
               {
                 name: 'その他',
-                value: '検索機能付いたよ\n/component名(一部可能)'
+                value: '検索機能付いたよ\n/search component名(一部可能)'
               }
             ]
           }
@@ -539,7 +539,7 @@ client.on('message', message => {
           }
         }
       }
-    }else if (command[0] == "say"){
+    }else if(command[0] == "say"){
       message.delete(1);
       if (command[1] !== undefined){
         let say = command[1];
@@ -550,15 +550,15 @@ client.on('message', message => {
       }else{
             message.channel.send("文字を入れてね");
       }
-    }else if (command[0] == "dl"){
+    }else if(command[0] == "dl"){
       message.delete(1);
       message.channel.send(dl);
-    }else if (command[0] == "el"){
+    }else if(command[0] == "el"){
       message.delete(1);
       message.channel.send(el);
-    }else if (command[0] == "u"){
+    }else if(command[0] == "u"){
       message.channel.send(uuid());
-    }else if (command[0].startsWith("m-")){
+    }else if(command[0].startsWith("m-")){
       message.delete(1);
       if (command[0] == "m-b"){
         message.channel.send(`{
@@ -647,7 +647,7 @@ client.on('message', message => {
     ]
   }`);
       }
-    }else if (command[0].startsWith("filter")){
+    }else if(command[0].startsWith("filter")){
       if (command[1] !== undefined){
         message.channel.send(filter(command[1],command[2],command[3],command[4],command[5]));
       }else{
@@ -660,7 +660,7 @@ client.on('message', message => {
   eff has_mob_effect
         `);
       }
-    }else if (command[0] == "ani"){
+    }else if(command[0] == "ani"){
       message.delete(1);
       if (command[1] == undefined){
         command[1] = " "
@@ -703,14 +703,14 @@ client.on('message', message => {
         }
       }
     }`);
-    }else if (command[0].startsWith("time")){
+    }else if(command[0].startsWith("time")){
       if (command[1] !== undefined && isFinite(command[1])){
         let timeselect = command[1].split(".")
         message.channel.send(`variable.time = variable.time < ${timeselect[0]} ? variable.time + 1:0; return variable.time == 0;`);
       }else{
         message.channel.send("生成する時間をtick単位で入力してください");
       }
-    }else if (command[0].startsWith("slot")){
+    }else if(command[0].startsWith("slot")){
       message.delete(1);
       if (command[1] == undefined){
         const first = Math.floor(Math.random()*9)+1
@@ -759,9 +759,9 @@ client.on('message', message => {
           message.channel.send("数値にしてね")
         }
       }
-    }else{
+    }else if(command[0] == "search"){
       for(let co = 0;co < component.length;co ++){
-        if(component[co].name.match(command[0])){
+        if(component[co].name.match(command[1])){
           message.channel.send("```\n" + component[co]["value"] + "```")
         }
       }
