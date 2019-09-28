@@ -3,7 +3,7 @@ const client = new Client();
 const fs = require('fs')
 let one;
 let two;
-let dl;
+let dl = [];
 let el;
 let saymode = true;
 let dummy;
