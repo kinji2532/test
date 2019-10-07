@@ -781,7 +781,7 @@ client.on('message', message => {
     }
   }
   }else{
-    for(let me = 0;co < replay.length;me ++){
+    for(let me = 0;me < replay.length;me ++){
       if(replay[me].name.match(message.content)){
         message.channel.send(replay[me].message)
       }
