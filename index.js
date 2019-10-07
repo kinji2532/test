@@ -162,9 +162,20 @@ client.on('ready', () => {
     type : 'PLAYING'
   })
   client.channels.get('599272915153715201').send("リログしました。")
-  client.channels.get('618798426758447114').fetchMessages({ limit: 1 }).then(messages =>{
+  client.channels.get('618798426758447114').fetchMessages({ limit: 10 }).then(messages =>{
     for(data of messages){
-      logmessage = data[1].content
+      if(data[1].content.startsWith('{"status":'){
+        let remote = JSON.parse(data[1].content)
+        fs.writeFile( "/app/status.json" ,JSON.stringify(remote,null,2),(err) => {
+          if(err){
+            client.channels.get('599272915153715201').send(err.message)
+            throw err
+          }else{
+            client.channels.get('599272915153715201').send("ファイルが正常に書き出しされました")
+          }
+        });
+        break;
+      }
     }
   })
 });
@@ -394,20 +405,6 @@ client.on('message', message => {
           }
         }
       );
-    }else if (command[0] === "remote"){
-      message.delete(1);
-      for(let f = 3; f < command.length;f ++){
-        command[1] = command[1] + " " + command[f]
-      }
-      let remote = JSON.parse(command[1]);
-      fs.writeFile( "./status.json" ,JSON.stringify(remote,null,2),(err) => {
-        if(err){
-          message.channel.send(err)
-          throw err
-        }else{
-          message.channel.send("ファイルが正常に書き出しされました")
-        }
-      });
     }else if(command[0] == "status"){
       message.delete(1);
       if(command[1] == "set"){
