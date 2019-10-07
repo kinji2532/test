@@ -422,14 +422,9 @@ client.on('message', message => {
         let username = message.author.username
         let userdata = `{"name": "${username}","id": "${userid}","coin": 100,"login": "済","comment": "Nothing here"}`
         status.status.push(JSON.parse(userdata))
-        fs.writeFile('status.json', JSON.stringify(status,null,2), function (err) {
-            if (err) {
-                throw err;
-            }else{
-              console.log(JSON.stringify(status))
-              client.channels.get('618798426758447114').send(JSON.stringify(status))
-            }
-          });
+        writefile(status,'status.json')
+        console.log(JSON.stringify(status))
+        client.channels.get('618798426758447114').send(JSON.stringify(status))
         message.channel.send("登録しました")
       }else if(command[1] == "comment"){
         status = require(pass + '/status.json')
@@ -444,14 +439,9 @@ client.on('message', message => {
                 comment = comment + " " + command[f]
               }
               status.status[set].comment = comment
-              fs.writeFile('status.json', JSON.stringify(status,null,2), function (err) {
-                  if (err) {
-                      throw err;
-                  }else{
-                    console.log(JSON.stringify(status))
-                    client.channels.get('618798426758447114').send(JSON.stringify(status))
-                  }
-                });
+              writefile(status,'status.json')
+              console.log(JSON.stringify(status))
+              client.channels.get('618798426758447114').send(JSON.stringify(status))
               message.channel.send("登録しました")
               return;
             }
@@ -464,14 +454,9 @@ client.on('message', message => {
           if(status.status[set].id == message.author.id && status.status[set].login == "未"){
             status.status[set].login = "済"
             status.status[set].coin = status.status[set].coin + 100
-            fs.writeFile('status.json', JSON.stringify(status,null,2), function (err) {
-              if (err) {
-                throw err;
-              }else{
-                console.log(JSON.stringify(status))
-                client.channels.get('618798426758447114').send(JSON.stringify(status))
-              }
-            });
+            writefile(status,'status.json')
+            console.log(JSON.stringify(status))
+            client.channels.get('618798426758447114').send(JSON.stringify(status))
             message.channel.send("ログインに成功しました")
             return;
           }else if(status.status[set].id == message.author.id && status.status[set].login == "済"){
@@ -480,10 +465,6 @@ client.on('message', message => {
           }
         }
         message.channel.send("まだ登録されていません。\n/status set で登録しましょう")
-      }else if(command[1] == "file" && message.author.id == '395010195090178058'){
-        message.delete(1);
-        status = require(pass + '/status.json')
-        console.log(JSON.stringify(status))
       }else if(command[1] == undefined){
         status = require(pass + '/status.json')
         let name = message.member.nickname
