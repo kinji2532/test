@@ -304,7 +304,10 @@ function remote(){
   client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"status":')){
-        writefile(JSON.parse(data[1].content),'status.json');
+        let statuslog = data[1].content
+        writefile(JSON.parse(statuslog),'status.json');
+        client.channels.get('618798426758447114').bulkDelete(100)
+        client.channels.get('618798426758447114').send(statuslog)
         break;
       }
     }
@@ -314,7 +317,7 @@ function remote(){
       if(data[1].content.startsWith('{"normal":')){
         let chickenjilog = data[1].content
         writefile(JSON.parse(chickenjilog),'chickenji.json');
-        client.channels.get('630638523296251905').bulkDelete(messages)
+        client.channels.get('630638523296251905').bulkDelete(100)
         client.channels.get('630638523296251905').send(chickenjilog)
         break;
       }
@@ -323,7 +326,10 @@ function remote(){
   client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"text":')){
-        writefile(JSON.parse(data[1].content),'replay.json');
+        let replaylog = data[1].content
+        writefile(JSON.parse(replaylog),'replay.json');
+        client.channels.get('630772669809426462').bulkDelete(100)
+        client.channels.get('630772669809426462').send(replaylog)
         break;
       }
     }
