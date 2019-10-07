@@ -1,13 +1,9 @@
 const { Client, Attachment } = require('discord.js');
 const client = new Client();
 const fs = require('fs')
-let one;
-let two;
-let logmessage;
+let one,two,logmessage,el,dummy,replay,status;
 let dl = [];
-let el;
-let saymode = true;
-let dummy;
+let saymode = true
 let component = [
   {
     "name":"minecraft:behavior.avoid_mob_type",
@@ -153,46 +149,7 @@ let component = [
     "value": ``
   }
 ]
-let replay = [
-  {
-    "name": "れきゅ",
-    "message": "よんだ？"
-  },
-  {
-    "name": "おはよ",
-    "message": "おはよー！"
-  },
-  {
-    "name": "おやすみ",
-    "message": "おやすみなさーい"
-  },
-  {
-    "name": "ただいま",
-    "message": "おかえりなさい！"
-  },
-  {
-    "name": "疲れた",
-    "message": "お疲れ様です"
-  }
-]
-let pass = __dirname
-let status;
-let chickenji = require(pass + '/chickenji.json')
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-  client.user.setActivity('れきゅねこ教',{
-    type : 'PLAYING'
-  })
-  client.channels.get('599272915153715201').send("リログしました。")
-  client.channels.get('618798426758447114').fetchMessages({ limit: 10 }).then(messages =>{
-    for(data of messages){
-      if(data[1].content.startsWith('{"status":')){
-        writefile(JSON.parse(data[1].content),'status.json');
-        break;
-      }
-    }
-  })
-});
+let pass = __dirname;
 
 function test(A){
   if (A == "equ"){
@@ -339,18 +296,54 @@ function writefile(data,file){
       client.channels.get('599272915153715201').send(err.message)
       throw err
     }else{
-      client.channels.get('599272915153715201').send("ファイルが正常に書き出しされました")
+      client.channels.get('618798426758447114').send("ファイルが正常に書き出しされました")
     }
   });
 }
+function remote(){
+  client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
+    for(data of messages){
+      if(data[1].content.startsWith('{"status":')){
+        writefile(JSON.parse(data[1].content),'status.json');
+        break;
+      }
+    }
+  })
+  client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
+    for(data of messages){
+      if(data[1].content.startsWith('{"normal":')){
+        writefile(JSON.parse(data[1].content),'chickenji.json');
+        break;
+      }
+    }
+  })
+  client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
+    for(data of messages){
+      if(data[1].content.startsWith('{"text":')){
+        writefile(JSON.parse(data[1].content),'replay.json');
+        break;
+      }
+    }
+  })
+}
+
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
+  client.user.setActivity('れきゅねこ教',{
+    type : 'PLAYING'
+  })
+  client.channels.get('599272915153715201').send("リログしました。")
+  remote();
+});
 
 client.on('message', message => {
   if(message.author.bot){
     return;
   }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
+    chickenji = require('/app/chickenji.json')
     let randoms = Math.floor(Math.random() * 100)
     if (randoms >= 90 && message.author.id != "537560435336151041"){
-      randoms = Math.floor(Math.random() * Object.keys(chickenji).length)
+      randoms = Math.floor(Math.random() * chickenji.rare.length)
       message.channel.send(chickenji.rare[randoms])
     }else{
       message.channel.send(chickenji.normal);
@@ -780,9 +773,10 @@ client.on('message', message => {
     }
   }
   }else{
-    for(let me = 0;me < replay.length;me ++){
-      if(message.content.match(replay[me].name)){
-        message.channel.send(replay[me].message)
+    reeplay = require('/app/replay.json')
+    for(let me = 0;me < replay.text.length;me ++){
+      if(message.content.match(replay.text[me].name)){
+        message.channel.send(replay.text[me].message)
       }
     }
   }
