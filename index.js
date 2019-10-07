@@ -164,7 +164,7 @@ client.on('ready', () => {
   client.channels.get('599272915153715201').send("リログしました。")
   client.channels.get('618798426758447114').fetchMessages({ limit: 10 }).then(messages =>{
     for(data of messages){
-      if(data[1].content.startsWith('{"status":'){
+      if(data[1].content.startsWith('{"status":')){
         let remote = JSON.parse(data[1].content)
         fs.writeFile( "/app/status.json" ,JSON.stringify(remote,null,2),(err) => {
           if(err){
