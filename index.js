@@ -322,6 +322,7 @@ function writefile(data,file){
     }
   });
 }
+
 client.on('message', message => {
   if (message.author.bot){
     return;
