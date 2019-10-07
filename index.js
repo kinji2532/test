@@ -160,7 +160,12 @@ client.on('ready', () => {
   client.user.setActivity('れきゅねこ教',{
     type : 'PLAYING'
   })
-  client.channels.get('618798426758447114').send("リログしました。")
+  client.channels.get('599272915153715201').send("リログしました。")
+  client.channels.get('618798426758447114').fetchMessages({ limit: 1 }).then(messages =>{
+    for(data of messages){
+      let logmessage = data[1].content
+    }
+  })
 });
 
 function test(A){
