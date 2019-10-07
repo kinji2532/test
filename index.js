@@ -3,6 +3,7 @@ const client = new Client();
 const fs = require('fs')
 let one;
 let two;
+let logmessage;
 let dl = [];
 let el;
 let saymode = true;
@@ -163,7 +164,7 @@ client.on('ready', () => {
   client.channels.get('599272915153715201').send("リログしました。")
   client.channels.get('618798426758447114').fetchMessages({ limit: 1 }).then(messages =>{
     for(data of messages){
-      let logmessage = data[1].content
+      logmessage = data[1].content
     }
   })
 });
