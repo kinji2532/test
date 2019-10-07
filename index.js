@@ -187,7 +187,7 @@ client.on('ready', () => {
   client.channels.get('618798426758447114').fetchMessages({ limit: 10 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"status":')){
-        writefile(JSON.parse(data[1].content),'status.json');
+        writefile(data[1].content,'status.json');
         break;
       }
     }
