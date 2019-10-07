@@ -781,8 +781,9 @@ client.on('message', message => {
   }else{
     replay = require('/app/replay.json')
     for(let me = 0;me < replay.text.length;me ++){
-      if(message.content.match(replay.text[me].name)){
+      if(message.content.match(replay.text[me].name && message.channel.id != '630772669809426462')){
         message.channel.send(replay.text[me].message)
+        break;
       }
     }
   }
