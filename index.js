@@ -153,6 +153,28 @@ let component = [
     "value": ``
   }
 ]
+let replay = [
+  {
+    "name": "れきゅ",
+    "message"; "よんだ？"
+  },
+  {
+    "name": "おはよ",
+    "message"; "おはよー！"
+  },
+  {
+    "name": "おやすみ",
+    "message"; "おやすみなさーい"
+  },
+  {
+    "name": "ただいま",
+    "message"; "おかえりなさい！"
+  },
+  {
+    "name": "疲れた",
+    "message"; "お疲れ様です"
+  }
+]
 let pass = __dirname
 let status;
 let chickenji = require(pass + '/chickenji.json')
@@ -324,18 +346,17 @@ function writefile(data,file){
 }
 
 client.on('message', message => {
-  if (message.author.bot){
+  if(message.author.bot){
     return;
-  }else if (message.content === "ちきんじ"　|| message.content === "チキンジ"){
+  }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
     let randoms = Math.floor(Math.random() * 100)
     if (randoms >= 90 && message.author.id != "537560435336151041"){
       randoms = Math.floor(Math.random() * Object.keys(chickenji).length)
       message.channel.send(chickenji.rare[randoms])
     }else{
       message.channel.send(chickenji.normal);
-
     }
-  }else if (message.content.startsWith("//test") || message.channel.id == "599272915153715201" ){
+  }else if(message.content.startsWith("//test") || message.channel.id == "599272915153715201" ){
     if(message.author.id == '395010195090178058'){
       message.delete(1);
       try {
@@ -345,9 +366,7 @@ client.on('message', message => {
         console.log(e)
       }
     }
-  }else if (message.content === "れきゅ"){
-    message.channel.send("よんだ？");
-  }else if (message.content === "お掃除終了～" && message.author.id == "537560435336151041"　&& message.channel.id == '593809602294841357'){
+  }else if(message.content === "お掃除終了～" && message.author.id == "537560435336151041"　&& message.channel.id == '593809602294841357'){
     status = require(pass + '/status.json')
     for (let set = 0;set < status.status.length;set ++){
       status.status[set].login = "未"
@@ -360,11 +379,7 @@ client.on('message', message => {
         client.channels.get('618798426758447114').send(JSON.stringify(status))
       }
     });
-  }else if (message.content.match("おはよ")){
-  message.channel.send("おはよ－！");
-  }else if (message.content.match("おやすみ")){
-  message.channel.send("おやすみなさーい");
-  }else if (message.content.startsWith("/")){
+  }else if(message.content.startsWith("/")){
     let command = message.content.replace("/","").split(" ")
     if(command == ""){
       return;
@@ -754,7 +769,7 @@ client.on('message', message => {
         }
       }
     }
-  }else{
+  }else if(message.content.startsWith("(")){
   let random = Math.floor(Math.random() * 4);
   if (random == 0){
     if (message.content　=== "( 'ω')") {
@@ -765,7 +780,13 @@ client.on('message', message => {
       message.channel.send("( - . -)");
     }
   }
-}
+  }else{
+    for(let me = 0;co < replay.length;me ++){
+      if(replay[me].name.match(message.content)){
+        message.channel.send(replay[me].message)
+      }
+    }
+  }
 });
 
 client.on('messageDelete',(message)=>{
