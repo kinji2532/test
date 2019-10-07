@@ -773,7 +773,7 @@ client.on('message', message => {
     }
   }
   }else{
-    reeplay = require('/app/replay.json')
+    replay = require('/app/replay.json')
     for(let me = 0;me < replay.text.length;me ++){
       if(message.content.match(replay.text[me].name)){
         message.channel.send(replay.text[me].message)
