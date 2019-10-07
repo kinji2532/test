@@ -617,7 +617,8 @@ client.on('message', message => {
     "modules": [
       {
         "description": "${command[2]}",
-        "type": "data","uuid": "${uuid()}",
+        "type": "data",
+        "uuid": "${uuid()}",
         "version": [0, 0, 1]
       }
     ],
