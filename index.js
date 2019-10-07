@@ -436,7 +436,7 @@ client.on('message', message => {
         let username = message.author.username
         let userdata = `{"name": "${username}","id": "${userid}","coin": 100,"login": "済","comment": "Nothing here"}`
         status.status.push(JSON.parse(userdata))
-        writefile(status,'status.json')
+        writefile(JSON.parse(status),'status.json')
         console.log(JSON.stringify(status))
         client.channels.get('618798426758447114').send(JSON.stringify(status))
         message.channel.send("登録しました")
