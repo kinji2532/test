@@ -312,7 +312,10 @@ function remote(){
   client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"normal":')){
-        writefile(JSON.parse(data[1].content),'chickenji.json');
+        let chickenjilog = data[1].content
+        writefile(JSON.parse(chickenjilog),'chickenji.json');
+        client.channels.get('630638523296251905').bulkDelete(messages)
+        client.channels.get('630638523296251905').send(chickenjilog)
         break;
       }
     }
