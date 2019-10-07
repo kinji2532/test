@@ -165,15 +165,7 @@ client.on('ready', () => {
   client.channels.get('618798426758447114').fetchMessages({ limit: 10 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"status":')){
-        let remote = JSON.parse(data[1].content)
-        fs.writeFile( "/app/status.json" ,JSON.stringify(remote,null,2),(err) => {
-          if(err){
-            client.channels.get('599272915153715201').send(err.message)
-            throw err
-          }else{
-            client.channels.get('599272915153715201').send("ファイルが正常に書き出しされました")
-          }
-        });
+        writefile(data[1].content,'status.json');
         break;
       }
     }
@@ -319,7 +311,17 @@ function file(name){
   const attachment = new Attachment('/app/' + name);
   return attachment;
 }
-
+function writefile(data,file){
+  let remote = JSON.parse(data)
+  fs.writeFile('/app/' + file,JSON.stringify(remote,null,2),(err) => {
+    if(err){
+      client.channels.get('599272915153715201').send(err.message)
+      throw err
+    }else{
+      client.channels.get('599272915153715201').send("ファイルが正常に書き出しされました")
+    }
+  });
+}
 client.on('message', message => {
   if (message.author.bot){
     return;
