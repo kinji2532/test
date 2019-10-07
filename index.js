@@ -156,23 +156,23 @@ let component = [
 let replay = [
   {
     "name": "れきゅ",
-    "message"; "よんだ？"
+    "message": "よんだ？"
   },
   {
     "name": "おはよ",
-    "message"; "おはよー！"
+    "message": "おはよー！"
   },
   {
     "name": "おやすみ",
-    "message"; "おやすみなさーい"
+    "message": "おやすみなさーい"
   },
   {
     "name": "ただいま",
-    "message"; "おかえりなさい！"
+    "message": "おかえりなさい！"
   },
   {
     "name": "疲れた",
-    "message"; "お疲れ様です"
+    "message": "お疲れ様です"
   }
 ]
 let pass = __dirname
