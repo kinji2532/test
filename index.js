@@ -300,37 +300,38 @@ function writefile(data,file){
     }
   });
 }
-function remote(){
-  client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
+function remote(type){
+  if(type == "status"){
+    client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"status":')){
-        writefile(JSON.parse(data[1].content),'status.json');
-        break;
+        return data[1].content;
       }else{
         data[1].delete();
       }
     }
   })
-  client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
+  }else if(type == "chickenji"){
+    client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"normal":')){
-        writefile(JSON.parse(data[1].content),'chickenji.json');
-        break;
+        return data[1].content;
       }else{
         data[1].delete();
       }
     }
   })
-  client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
+  }else if(type == "replay"){
+    client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"text":')){
-        writefile(JSON.parse(data[1].content),'replay.json');
-        break;
+        return data[1].content;
       }else{
         data[1].delete();
       }
     }
   })
+  }
 }
 
 client.on('ready', () => {
@@ -339,14 +340,13 @@ client.on('ready', () => {
     type : 'PLAYING'
   })
   client.channels.get('599272915153715201').send("リログしました。")
-  remote();
 });
 
 client.on('message', message => {
   if(message.author.bot){
     return;
   }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
-    chickenji = require('/app/chickenji.json')
+    chickenji = remote("chickenji")
     let randoms = Math.floor(Math.random() * 100)
     if (randoms >= 90 && message.author.id != "537560435336151041"){
       randoms = Math.floor(Math.random() * chickenji.rare.length)
@@ -422,9 +422,9 @@ client.on('message', message => {
         }
       );
     }else if(command[0] == "status"){
+      status = remote("status")
       message.delete(1);
       if(command[1] == "set"){
-        status = require(pass + '/status.json')
         for (let set = 0;set < status.status.length;set ++){
           if(status.status[set].id == message.author.id){
             message.channel.send("既に登録済みです")
@@ -435,12 +435,11 @@ client.on('message', message => {
         let username = message.author.username
         let userdata = `{"name": "${username}","id": "${userid}","coin": 100,"login": "済","comment": "Nothing here"}`
         status.status.push(JSON.parse(userdata))
-        writefile(status,'status.json')
         console.log(JSON.stringify(status))
         client.channels.get('618798426758447114').send(JSON.stringify(status))
         message.channel.send("登録しました")
       }else if(command[1] == "comment"){
-        status = require(pass + '/status.json')
+        status = remote("status")
         if(command[2] == null){
           message.channel.send("/status comment ひとこと だよ")
           return;
@@ -452,7 +451,6 @@ client.on('message', message => {
                 comment = comment + " " + command[f]
               }
               status.status[set].comment = comment
-              writefile(status,'status.json')
               console.log(JSON.stringify(status))
               client.channels.get('618798426758447114').send(JSON.stringify(status))
               message.channel.send("登録しました")
@@ -462,12 +460,11 @@ client.on('message', message => {
           message.channel.send("まだ登録されていません。\n/set で登録しましょう")
         }
       }else if(command[1] == "login"){
-        status = require(pass + '/status.json')
+        status = remote("status")
         for (let set = 0;set < status.status.length;set ++){
           if(status.status[set].id == message.author.id && status.status[set].login == "未"){
             status.status[set].login = "済"
             status.status[set].coin = status.status[set].coin + 100
-            writefile(status,'status.json')
             console.log(JSON.stringify(status))
             client.channels.get('618798426758447114').send(JSON.stringify(status))
             message.channel.send("ログインに成功しました")
@@ -479,7 +476,7 @@ client.on('message', message => {
         }
         message.channel.send("まだ登録されていません。\n/status set で登録しましょう")
       }else if(command[1] == undefined){
-        status = require(pass + '/status.json')
+        status = remote("status")
         let name = message.member.nickname
         if(name == null){
           name = message.author.username
@@ -508,7 +505,7 @@ client.on('message', message => {
         }
         message.channel.send("まだ登録されていません。\n/status set で登録しましょう")
       }else if(command[1].startsWith('<')){
-        status = require(pass + '/status.json')
+        status = remote("status")
         if(message.mentions.users.first() != undefined){
           for(user of message.mentions.users){
             let name = message.guild.members.get(user[1].id).nickname
@@ -779,7 +776,7 @@ client.on('message', message => {
     }
   }
   }else{
-    replay = require('/app/replay.json')
+    replay = remote("replay")
     for(let me = 0;me < replay.text.length;me ++){
       if(message.content.match(replay.text[me].name)  && message.channel.id != '630772669809426462'){
         message.channel.send(replay.text[me].message)
