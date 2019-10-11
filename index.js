@@ -346,7 +346,7 @@ client.on('message', message => {
   if(message.author.bot){
     return;
   }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
-    chickenji = remote("chickenji")
+    chickenji = remote("chickenji");
     let randoms = Math.floor(Math.random() * 100)
     if (randoms >= 90 && message.author.id != "537560435336151041"){
       randoms = Math.floor(Math.random() * chickenji.rare.length)
@@ -422,7 +422,7 @@ client.on('message', message => {
         }
       );
     }else if(command[0] == "status"){
-      status = remote("status")
+      status = remote("status");
       message.delete(1);
       if(command[1] == "set"){
         for (let set = 0;set < status.status.length;set ++){
@@ -439,7 +439,6 @@ client.on('message', message => {
         client.channels.get('618798426758447114').send(JSON.stringify(status))
         message.channel.send("登録しました")
       }else if(command[1] == "comment"){
-        status = remote("status")
         if(command[2] == null){
           message.channel.send("/status comment ひとこと だよ")
           return;
@@ -460,7 +459,6 @@ client.on('message', message => {
           message.channel.send("まだ登録されていません。\n/set で登録しましょう")
         }
       }else if(command[1] == "login"){
-        status = remote("status")
         for (let set = 0;set < status.status.length;set ++){
           if(status.status[set].id == message.author.id && status.status[set].login == "未"){
             status.status[set].login = "済"
@@ -505,7 +503,6 @@ client.on('message', message => {
         }
         message.channel.send("まだ登録されていません。\n/status set で登録しましょう")
       }else if(command[1].startsWith('<')){
-        status = remote("status")
         if(message.mentions.users.first() != undefined){
           for(user of message.mentions.users){
             let name = message.guild.members.get(user[1].id).nickname
@@ -776,7 +773,7 @@ client.on('message', message => {
     }
   }
   }else{
-    replay = remote("replay")
+    replay = remote("replay");
     for(let me = 0;me < replay.text.length;me ++){
       if(message.content.match(replay.text[me].name)  && message.channel.id != '630772669809426462'){
         message.channel.send(replay.text[me].message)
