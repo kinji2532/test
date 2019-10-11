@@ -305,7 +305,7 @@ function remote(type){
     client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"status":')){
-        return JSON.stringify(data[1].content);
+        return data[1].content;
       }else{
         data[1].delete();
       }
@@ -315,7 +315,7 @@ function remote(type){
     client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"normal":')){
-        return JSON.stringify(data[1].content);
+        return data[1].content;
       }else{
         data[1].delete();
       }
@@ -325,7 +325,7 @@ function remote(type){
     client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"text":')){
-        return JSON.stringify(data[1].content);
+        return data[1].content;
       }else{
         data[1].delete();
       }
