@@ -301,6 +301,7 @@ function writefile(data,file){
   });
 }
 function remote(type){
+  client.channels.get('599272915153715201').send("起動")
   if(type == "status"){
     client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
