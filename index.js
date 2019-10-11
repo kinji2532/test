@@ -346,6 +346,7 @@ client.on('message', message => {
   if(message.author.bot){
     return;
   }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
+    remote();
     chickenji = require('/app/chickenji.json')
     let randoms = Math.floor(Math.random() * 100)
     if (randoms >= 90 && message.author.id != "537560435336151041"){
@@ -422,6 +423,7 @@ client.on('message', message => {
         }
       );
     }else if(command[0] == "status"){
+      remote();
       message.delete(1);
       if(command[1] == "set"){
         status = require(pass + '/status.json')
@@ -779,6 +781,7 @@ client.on('message', message => {
     }
   }
   }else{
+    remote();
     replay = require('/app/replay.json')
     for(let me = 0;me < replay.text.length;me ++){
       if(message.content.match(replay.text[me].name)  && message.channel.id != '630772669809426462'){
