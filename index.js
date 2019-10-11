@@ -471,7 +471,6 @@ client.on('message', message => {
         }
         message.channel.send("まだ登録されていません。\n/status set で登録しましょう")
       }else if(command[1] == undefined){
-        status = remote("status")
         let name = message.member.nickname
         if(name == null){
           name = message.author.username
