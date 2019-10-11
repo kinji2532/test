@@ -305,6 +305,7 @@ function remote(type){
     client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"status":')){
+        client.channels.get('618798426758447114').send("読み込み完了")
         return data[1].content;
       }else{
         data[1].delete();
@@ -315,6 +316,7 @@ function remote(type){
     client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"normal":')){
+        client.channels.get('630638523296251905').send("読み込み完了")
         return data[1].content;
       }else{
         data[1].delete();
@@ -325,6 +327,7 @@ function remote(type){
     client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
       if(data[1].content.startsWith('{"text":')){
+        client.channels.get('630772669809426462').send("読み込み完了")
         return data[1].content;
       }else{
         data[1].delete();
