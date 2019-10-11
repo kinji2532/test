@@ -1,7 +1,10 @@
 const { Client, Attachment } = require('discord.js');
 const client = new Client();
 const fs = require('fs')
-let one,two,logmessage,el,dummy,replay,status;
+let one,two,logmessage,el,dummy;
+let status = {"status": [ "null" ] }
+let chickenji = {"normal": "null", "rare": ["null"] }
+let replay = {"text": [ "null" ] }
 let dl = [];
 let saymode = true
 let component = [
@@ -290,17 +293,7 @@ function file(name){
   const attachment = new Attachment('/app/' + name);
   return attachment;
 }
-function writefile(data,file){
-  fs.writeFile('/app/' + file,JSON.stringify(data,null,2),(err) => {
-    if(err){
-      client.channels.get('599272915153715201').send(err.message)
-      throw err
-    }else{
-      client.channels.get('618798426758447114').send("ファイルが正常に書き出しされました")
-    }
-  });
-}
-function remote(type){
+function reload(type){
   client.channels.get('599272915153715201').send("起動")
   if(type == "status"){
     client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
@@ -350,7 +343,7 @@ client.on('message', message => {
   if(message.author.bot){
     return;
   }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
-    chickenji = remote("chickenji");
+    chickenji = reload("chickenji");
     let randoms = Math.floor(Math.random() * 100)
     if (randoms >= 90 && message.author.id != "537560435336151041"){
       randoms = Math.floor(Math.random() * chickenji.rare.length)
@@ -426,7 +419,7 @@ client.on('message', message => {
         }
       );
     }else if(command[0] == "status"){
-      status = remote("status");
+      status = reload("status");
       message.delete(1);
       if(command[1] == "set"){
         for (let set = 0;set < status.status.length;set ++){
