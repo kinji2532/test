@@ -330,9 +330,10 @@ client.on('ready', () => {
     type : 'PLAYING'
   })
   client.channels.get('599272915153715201').send("リログしました。")
+  reload();
 });
 client.on('message', message => {
-  reload();
+  if(message.content.startsWith("{"))reload();
   if(message.author.bot){
     return;
   }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
