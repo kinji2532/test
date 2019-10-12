@@ -585,10 +585,14 @@ client.on('message', message => {
       }else if(command[1] == "remove"){
         if(command[2] == "g"){
           delete memo.memobox.global[command[3]];
+          memoedit.edit(JSON.stringify(memo))
+          message.channel.send("削除しました")
         }else if(command[2] == "p"){
           for(let b = 0;b < memo.memobox.private.length;b ++){
             if(message.author.id == memo.memobox.private[b].userid){
               delete memo.memobox.private[b].memo[command[3]];
+              memoedit.edit(JSON.stringify(memo))
+              message.channel.send("削除しました")
             }
           }
         }
