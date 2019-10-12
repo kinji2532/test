@@ -554,14 +554,14 @@ client.on('message', message => {
           for(data in memo.memobox.global){
             if(data == command[3]){
               message.channel.send("このキーは使われています")
-              break;
+              return;
             }
           }
           for(let memoo = 5;memoo < command.length;memoo ++){
             command[4] = command[4] + " " + command[memoo]
           }
           memo.memobox.global[command[3]] = command[4]
-          memoedit.edit(memo)
+          memoedit.edit(JSON.parse(memo))
           message.channel.send("登録しました")
         }else if(command[2] == "p"){
           for(data of memo.memobox.private){
@@ -569,14 +569,14 @@ client.on('message', message => {
               for(da in data.memo){
                 if(command[3] == da){
                   message.channel.send("このキーは使われています")
-                  break;
+                  return;
                 }
               }
               for(let memoo = 5;memoo < command.length;memoo ++){
                 command[4] = command[4] + " " + command[memoo]
               }
               data.memo[command[3]] = command[4]
-              memoedit.edit(memo)
+              memoedit.edit(JSON.parse(memo))
               message.channel.send("登録しました")
             }
           }
