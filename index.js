@@ -578,7 +578,7 @@ client.on('message', message => {
               return;
             }
           }
-          memo.memobox.private.push(`{"userid":"${message.author.id}","memo":{"${command[3]}":"${command[4]}"}}`)
+          memo.memobox.private.push(JSON.stringify(`{"userid":"${message.author.id}","memo":{"${command[3]}":"${command[4]}"}}`))
           memoedit.edit(JSON.stringify(memo))
           message.channel.send("登録しました")
         }
