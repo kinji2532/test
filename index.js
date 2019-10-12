@@ -1,7 +1,7 @@
 const { Client, Attachment } = require('discord.js');
 const client = new Client();
 const fs = require('fs')
-let one,two,logmessage,el,dummy,replay,status,chickenji;
+let one,two,logmessage,el,dummy,replay,status,chickenji,memo;
 let dl = [];
 let saymode = true
 let component = [
@@ -321,6 +321,16 @@ function reload(){
       }
     }
   })
+  client.channels.get('632418698652811295').fetchMessages({ limit: 50 }).then(messages =>{
+    for(data of messages){
+      if(data[1].content.startsWith('{"memobox":')){
+        memo = JSON.parse(data[1].content)
+        break;
+      }else{
+        data[1].delete();
+      }
+    }
+  })
   console.log("reloading...")
 }
 
@@ -333,6 +343,7 @@ client.on('ready', () => {
   client.channels.get('599272915153715201').send("リログしました。")
   reload();
 });
+
 client.on('message', message => {
   if(message.content.startsWith('{"'))reload();
   if(message.author.bot){
@@ -366,7 +377,7 @@ client.on('message', message => {
     let command = message.content.replace("/","").split(" ")
     if(command == ""){
       return;
-    }else if (command[0] === "help"){
+    }else if (command[0] == "help"){
       message.channel.send(
         {
           embed: {
@@ -512,6 +523,26 @@ client.on('message', message => {
                     description: `coin: ${status.status[set].coin}\nlogin: ${status.status[set].login}`
                   }
                 })
+              }
+            }
+          }
+        }
+      }
+    }else if(command[0] == "memo"){
+      if(command[1] == undefined){
+        message.channel.send("準備中")
+      }else if(command[1] == "g"){
+        for(data in memo.memobox.everyone){
+          if(command[2] == data){
+            message.channel.send(memo.memobox.everyone[data])
+          }
+        }
+      }else if(command[1] == "p"){
+        for(data of memo.memobox.private){
+          if(message.author.id == data.userid){
+            for(da in data.memo){
+              if(command[2] == da){
+                message.channel.send(data.memo[da])
               }
             }
           }
@@ -765,12 +796,14 @@ client.on('message', message => {
     }
   }
 });
+
 client.on('messageDelete',(message)=>{
   if(!message.content.startsWith("/")){
     console.log(`${message.author.username}削除=>${message.content}`)
     dl = `${message.author.username}削除=>${message.content}`
   }
 });
+
 client.on('messageUpdate',(oldMe,newMe)=>{
   reload();
   if(oldMe != ""){
