@@ -768,14 +768,12 @@ client.on('message', message => {
     }
   }
 });
-
 client.on('messageDelete',(message)=>{
   if(!message.content.startsWith("/")){
     console.log(`${message.author.username}削除=>${message.content}`)
     dl = `${message.author.username}削除=>${message.content}`
   }
 });
-
 client.on('messageUpdate',(oldMe,newMe)=>{
   reload();
   if(oldMe != ""){
