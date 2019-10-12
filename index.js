@@ -329,6 +329,7 @@ client.on('ready', () => {
   client.user.setActivity('れきゅねこ教',{
     type : 'PLAYING'
   })
+  client.channels.get('599272915153715201').bulkDelete(100)
   client.channels.get('599272915153715201').send("リログしました。")
   reload();
 });
