@@ -305,7 +305,8 @@ function reload(type){
     client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
       for(data of messages){
         if(data[1].content.startsWith('{"status":')){
-          status = JSON.parse(data[1].content)
+          let logtext = data[1].content
+          status = JSON.parse(logtext)
           break;
         }else{
           data[1].delete();
@@ -316,7 +317,8 @@ function reload(type){
     client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
       for(data of messages){
         if(data[1].content.startsWith('{"normal":')){
-          chickenji = JSON.parse(data[1].content)
+          let logtext = data[1].content
+          chickenji = JSON.parse(logtext)
           break;
         }else{
           data[1].delete();
@@ -327,7 +329,8 @@ function reload(type){
     client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
       for(data of messages){
         if(data[1].content.startsWith('{"text":')){
-          replay = JSON.parse(data[1].content)
+          let logtext = data[1].content
+          replay = JSON.parse(logtext)
           break;
         }else{
           data[1].delete();
