@@ -1,7 +1,7 @@
 const { Client, Attachment } = require('discord.js');
 const client = new Client();
 const fs = require('fs')
-let one,two,logmessage,el,dummy,replay,status;
+let one,two,logmessage,el,dummy,replay,status,chickenji;
 let dl = [];
 let saymode = true
 let component = [
@@ -300,37 +300,41 @@ function writefile(data,file){
     }
   });
 }
-function remote(){
-  client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
-    for(data of messages){
-      if(data[1].content.startsWith('{"status":')){
-        writefile(JSON.parse(data[1].content),'status.json');
-        break;
-      }else{
-        data[1].delete();
+function reload(type){
+  if(type == "status"){
+    client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
+      for(data of messages){
+        if(data[1].content.startsWith('{"status":')){
+          writefile(JSON.parse(data[1].content),'status.json');
+          break;
+        }else{
+          data[1].delete();
+        }
       }
-    }
-  })
-  client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
-    for(data of messages){
-      if(data[1].content.startsWith('{"normal":')){
-        writefile(JSON.parse(data[1].content),'chickenji.json');
-        break;
-      }else{
-        data[1].delete();
+    })
+  }else if(type == "chickenji"){
+    client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
+      for(data of messages){
+        if(data[1].content.startsWith('{"normal":')){
+          writefile(JSON.parse(data[1].content),'chickenji.json');
+          break;
+        }else{
+          data[1].delete();
+        }
       }
-    }
-  })
-  client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
-    for(data of messages){
-      if(data[1].content.startsWith('{"text":')){
-        writefile(JSON.parse(data[1].content),'replay.json');
-        break;
-      }else{
-        data[1].delete();
+    })
+  }else if(type == "replay"){
+    client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
+      for(data of messages){
+        if(data[1].content.startsWith('{"text":')){
+          writefile(JSON.parse(data[1].content),'replay.json');
+          break;
+        }else{
+          data[1].delete();
+        }
       }
-    }
-  })
+    })
+  }
 }
 
 client.on('ready', () => {
@@ -339,15 +343,12 @@ client.on('ready', () => {
     type : 'PLAYING'
   })
   client.channels.get('599272915153715201').send("リログしました。")
-  remote();
 });
 
 client.on('message', message => {
   if(message.author.bot){
     return;
   }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
-    remote();
-    chickenji = require('/app/chickenji.json')
     let randoms = Math.floor(Math.random() * 100)
     if (randoms >= 90 && message.author.id != "537560435336151041"){
       randoms = Math.floor(Math.random() * chickenji.rare.length)
@@ -423,7 +424,6 @@ client.on('message', message => {
         }
       );
     }else if(command[0] == "status"){
-      remote();
       message.delete(1);
       if(command[1] == "set"){
         status = require(pass + '/status.json')
@@ -781,8 +781,6 @@ client.on('message', message => {
     }
   }
   }else{
-    remote();
-    replay = require('/app/replay.json')
     for(let me = 0;me < replay.text.length;me ++){
       if(message.content.match(replay.text[me].name)  && message.channel.id != '630772669809426462'){
         message.channel.send(replay.text[me].message)
