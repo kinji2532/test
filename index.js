@@ -589,7 +589,6 @@ client.on('message', message => {
           for(let b = 0;b < memo.memobox.private.length;b ++){
             if(message.author.id == memo.memobox.private[b].userid){
               delete memo.memobox.private[b].memo[command[3]]
-              }
             }
           }
         }
