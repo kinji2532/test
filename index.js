@@ -579,7 +579,7 @@ client.on('message', message => {
             }
           }
           memo.memobox.private.push(JSON.stringify(`{"userid":"${message.author.id}","memo":{"${command[3]}":"${command[4]}"}}`))
-          memoedit.edit(JSON.stringify(memo))
+          memoedit.edit(JSON.parse(memo))
           message.channel.send("登録しました")
         }
       }else if(command[1] == "remove"){
