@@ -333,7 +333,7 @@ client.on('ready', () => {
   reload();
 });
 client.on('message', message => {
-  if(message.content.startsWith("{"))reload();
+  if(message.content.startsWith('{"'))reload();
   if(message.author.bot){
     return;
   }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
