@@ -300,47 +300,38 @@ function writefile(data,file){
     }
   });
 }
-function reload(type){
-  if(type == "status"){
-    client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
-      for(data of messages){
-        if(data[1].content.startsWith('{"status":')){
-          console.log(data[1].content)
-          let logtext = data[1].content
-          status = JSON.parse(logtext)
-          console.log(states)
-          break;
-        }else{
-          data[1].delete();
-        }
+function reload(){
+  client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
+    for(data of messages){
+      if(data[1].content.startsWith('{"status":')){
+        status = JSON.parse(data[1].content)
+        break;
+      }else{
+        data[1].delete();
       }
-    })
-  }else if(type == "chickenji"){
-    client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
-      for(data of messages){
-        if(data[1].content.startsWith('{"normal":')){
-          console.log(data[1].content)
-          let logtext = data[1].content
-          chickenji = JSON.parse(logtext)
-          console.log(chickenji)
-          break;
-        }else{
-          data[1].delete();
-        }
+    }
+  })
+  client.channels.get('630638523296251905').fetchMessages({ limit: 50 }).then(messages =>{
+    for(data of messages){
+      if(data[1].content.startsWith('{"normal":')){
+        chickenji = JSON.parse(data[1].content)
+        break;
+      }else{
+        data[1].delete();
       }
-    })
-  }else if(type == "replay"){
-    client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
-      for(data of messages){
-        if(data[1].content.startsWith('{"text":')){
-          replay = JSON.parse(data[1].content)
-          break;
-        }else{
-          data[1].delete();
-        }
+    }
+  })
+  client.channels.get('630772669809426462').fetchMessages({ limit: 50 }).then(messages =>{
+    for(data of messages){
+      if(data[1].content.startsWith('{"text":')){
+        replay = JSON.parse(data[1].content)
+        break;
+      }else{
+        data[1].delete();
       }
-    })
-  }
+    }
+  })
+  console.log("reloading...")
 }
 
 client.on('ready', () => {
@@ -350,8 +341,8 @@ client.on('ready', () => {
   })
   client.channels.get('599272915153715201').send("リログしました。")
 });
-
 client.on('message', message => {
+  reload();
   if(message.author.bot){
     return;
   }else if(message.content === "ちきんじ"　|| message.content === "チキンジ"){
@@ -804,6 +795,7 @@ client.on('messageDelete',(message)=>{
 });
 
 client.on('messageUpdate',(oldMe,newMe)=>{
+  reload();
   if(oldMe != ""){
     console.log(`${oldMe.author.username}編集:${oldMe}=>${newMe}`)
     el = `${oldMe.author.username}編集:${oldMe}=>${newMe}`
