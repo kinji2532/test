@@ -528,9 +528,9 @@ client.on('message', message => {
           }
         }
       }
-    }else if(command[0] == "memo"){
+    }else if(command[0] == "memo" || command[1] == "m"){
       if(command[1] == undefined){
-        message.channel.send("準備中")
+        return;
       }else if(command[1] == "g"){
         for(data in memo.memobox.everyone){
           if(command[2] == data){
