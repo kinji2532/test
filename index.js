@@ -308,6 +308,7 @@ function reload(type){
           console.log(data[1].content)
           let logtext = data[1].content
           status = JSON.parse(logtext)
+          console.log(states)
           break;
         }else{
           data[1].delete();
@@ -321,6 +322,7 @@ function reload(type){
           console.log(data[1].content)
           let logtext = data[1].content
           chickenji = JSON.parse(logtext)
+          console.log(chickenji)
           break;
         }else{
           data[1].delete();
@@ -334,6 +336,7 @@ function reload(type){
           console.log(data[1].content)
           let logtext = data[1].content
           replay = JSON.parse(logtext)
+          console.log(replay)
           break;
         }else{
           data[1].delete();
