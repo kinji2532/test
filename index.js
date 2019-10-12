@@ -528,7 +528,7 @@ client.on('message', message => {
           }
         }
       }
-    }else if(command[0] == "memo" || command[1] == "m"){
+    }else if(command[0] == "memo" || command[0] == "m"){
       if(command[1] == undefined){
         return;
       }else if(command[1] == "g"){
