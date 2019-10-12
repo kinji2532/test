@@ -1,7 +1,7 @@
 const { Client, Attachment } = require('discord.js');
 const client = new Client();
 const fs = require('fs')
-let one,two,logmessage,el,dummy,replay,status,chickenji,memo;
+let one,two,logmessage,el,dummy,replay,status,chickenji,memo,statusedit,memoedit;
 let dl = [];
 let saymode = true
 let component = [
@@ -295,6 +295,7 @@ function reload(){
     for(data of messages){
       if(data[1].content.startsWith('{"status":')){
         status = JSON.parse(data[1].content)
+        statusedit = data[1]
         break;
       }else{
         data[1].delete();
@@ -325,6 +326,7 @@ function reload(){
     for(data of messages){
       if(data[1].content.startsWith('{"memobox":')){
         memo = JSON.parse(data[1].content)
+        memoedit = data[1]
         break;
       }else{
         data[1].delete();
@@ -532,9 +534,9 @@ client.on('message', message => {
       if(command[1] == undefined){
         return;
       }else if(command[1] == "g"){
-        for(data in memo.memobox.everyone){
+        for(data in memo.memobox.global){
           if(command[2] == data){
-            message.channel.send(memo.memobox.everyone[data])
+            message.channel.send(memo.memobox.global[data])
           }
         }
       }else if(command[1] == "p"){
@@ -546,6 +548,42 @@ client.on('message', message => {
               }
             }
           }
+        }
+      }else if(command[1] == "add"){
+        if(command[2] == "g"){
+          for(data in memo.memobox.global){
+            if(data == command[3]){
+              message.channel.send("このキーは使われています")
+              break;
+            }
+          }
+          for(let memoo = 5;memoo < command.length;memoo ++){
+            command[4] = command[4] + " " + command[memoo]
+          }
+          memo.memobox.global[command[3]] = command[4]
+          memoedit.edit(memo)
+          message.channel.send("登録しました")
+        }else if(command[2] == "p"){
+          for(data of memo.memobox.private){
+            if(message.author.id == data.userid){
+              for(da in data.memo){
+                if(command[3] == da){
+                  message.channel.send("このキーは使われています")
+                  break;
+                }
+              }
+              for(let memoo = 5;memoo < command.length;memoo ++){
+                command[4] = command[4] + " " + command[memoo]
+              }
+              data.memo[command[3]] = command[4]
+              memoedit.edit(memo)
+              message.channel.send("登録しました")
+            }
+          }
+        }
+      }else if(command[1] == "remove"){
+        if(command[2] == "g"){
+        }else if(command[2] == "p"){
         }
       }
     }else if(command[0] == "say"){
