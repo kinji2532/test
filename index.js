@@ -423,7 +423,6 @@ client.on('message', message => {
         client.channels.get('618798426758447114').send(JSON.stringify(status))
         message.channel.send("登録しました")
       }else if(command[1] == "comment"){
-        status = require(pass + '/status.json')
         if(command[2] == null){
           message.channel.send("/status comment ひとこと だよ")
           return;
@@ -444,7 +443,6 @@ client.on('message', message => {
           message.channel.send("まだ登録されていません。\n/set で登録しましょう")
         }
       }else if(command[1] == "login"){
-        status = require(pass + '/status.json')
         for (let set = 0;set < status.status.length;set ++){
           if(status.status[set].id == message.author.id && status.status[set].login == "未"){
             status.status[set].login = "済"
@@ -460,7 +458,6 @@ client.on('message', message => {
         }
         message.channel.send("まだ登録されていません。\n/status set で登録しましょう")
       }else if(command[1] == undefined){
-        status = require(pass + '/status.json')
         let name = message.member.nickname
         if(name == null){
           name = message.author.username
@@ -489,7 +486,6 @@ client.on('message', message => {
         }
         message.channel.send("まだ登録されていません。\n/status set で登録しましょう")
       }else if(command[1].startsWith('<')){
-        status = require(pass + '/status.json')
         if(message.mentions.users.first() != undefined){
           for(user of message.mentions.users){
             let name = message.guild.members.get(user[1].id).nickname
