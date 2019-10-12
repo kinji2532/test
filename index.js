@@ -561,7 +561,7 @@ client.on('message', message => {
             command[4] = command[4] + " " + command[memoo]
           }
           memo.memobox.global[command[3]] = command[4]
-          memoedit.edit(JSON.parse(memo))
+          memoedit.edit(JSON.stringify(memo))
           message.channel.send("登録しました")
         }else if(command[2] == "p"){
           for(data of memo.memobox.private){
@@ -576,7 +576,7 @@ client.on('message', message => {
                 command[4] = command[4] + " " + command[memoo]
               }
               data.memo[command[3]] = command[4]
-              memoedit.edit(JSON.parse(memo))
+              memoedit.edit(JSON.stringify(memo))
               message.channel.send("登録しました")
             }
           }
