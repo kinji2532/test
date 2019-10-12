@@ -290,16 +290,6 @@ function file(name){
   const attachment = new Attachment('/app/' + name);
   return attachment;
 }
-function writefile(data,file){
-  fs.writeFile('/app/' + file,JSON.stringify(data,null,2),(err) => {
-    if(err){
-      client.channels.get('599272915153715201').send(err.message)
-      throw err
-    }else{
-      client.channels.get('618798426758447114').send("ファイルが正常に書き出しされました")
-    }
-  });
-}
 function reload(){
   client.channels.get('618798426758447114').fetchMessages({ limit: 50 }).then(messages =>{
     for(data of messages){
@@ -368,14 +358,8 @@ client.on('message', message => {
     for (let set = 0;set < status.status.length;set ++){
       status.status[set].login = "未"
     }
-    fs.writeFile('status.json', JSON.stringify(status,null,2), function (err) {
-      if (err) {
-        throw err;
-      }else{
-        console.log(JSON.stringify(status))
-        client.channels.get('618798426758447114').send(JSON.stringify(status))
-      }
-    });
+    console.log(JSON.stringify(status))
+    client.channels.get('618798426758447114').send(JSON.stringify(status))
   }else if(message.content.startsWith("/")){
     let command = message.content.replace("/","").split(" ")
     if(command == ""){
@@ -434,7 +418,6 @@ client.on('message', message => {
         let username = message.author.username
         let userdata = `{"name": "${username}","id": "${userid}","coin": 100,"login": "済","comment": "Nothing here"}`
         status.status.push(JSON.parse(userdata))
-        writefile(status,'status.json')
         console.log(JSON.stringify(status))
         client.channels.get('618798426758447114').send(JSON.stringify(status))
         message.channel.send("登録しました")
@@ -451,7 +434,6 @@ client.on('message', message => {
                 comment = comment + " " + command[f]
               }
               status.status[set].comment = comment
-              writefile(status,'status.json')
               console.log(JSON.stringify(status))
               client.channels.get('618798426758447114').send(JSON.stringify(status))
               message.channel.send("登録しました")
@@ -466,7 +448,6 @@ client.on('message', message => {
           if(status.status[set].id == message.author.id && status.status[set].login == "未"){
             status.status[set].login = "済"
             status.status[set].coin = status.status[set].coin + 100
-            writefile(status,'status.json')
             console.log(JSON.stringify(status))
             client.channels.get('618798426758447114').send(JSON.stringify(status))
             message.channel.send("ログインに成功しました")
