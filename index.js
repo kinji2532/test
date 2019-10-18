@@ -826,21 +826,20 @@ client.on('message', message => {
       }
     }
   }else if(message.content.startsWith("(")){
-  let random = Math.floor(Math.random() * 4);
-  if (random == 0){
-    if (message.content　=== "( 'ω')") {
-      message.channel.send("( 'ω')");
-    }else if (message.content　=== "(っ'ヮ'c)"){
-      message.channel.send("(っ'ヮ'c)");
-    }else if (message.content　=== "( - . -)") {
-      message.channel.send("( - . -)");
+    let random = Math.floor(Math.random() * 4);
+    if (random == 0){
+      if (message.content　=== "( 'ω')") {
+        message.channel.send("( 'ω')");
+      }else if (message.content　=== "(っ'ヮ'c)"){
+        message.channel.send("(っ'ヮ'c)");
+      }else if (message.content　=== "( - . -)") {
+        message.channel.send("( - . -)");
+      }
     }
-  }
-  }else{
+  }else if(message.content != ""){
     for(let me = 0;me < replay.text.length;me ++){
       if(message.content.match(replay.text[me].name)  && message.channel.id != '630772669809426462'){
         message.channel.send(replay.text[me].message)
-        break;
       }
     }
   }
