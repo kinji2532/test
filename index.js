@@ -1,7 +1,7 @@
 const { Client, Attachment } = require('discord.js');
 const client = new Client();
 const fs = require('fs');
-const request = require('request');
+const cron = require('node-cron');
 let one,two,logmessage,el,dummy,replay,status,chickenji,memo,statusedit,memoedit;
 let dl = [];
 let saymode = true
@@ -152,6 +152,13 @@ let component = [
 ]
 let pass = __dirname;
 
+cron.schedule('0 0 0 * * *', ()={
+  for (let set = 0;set < status.status.length;set ++){
+    status.status[set].login = "未"
+  }
+  console.log(JSON.stringify(status))
+  client.channels.get('618798426758447114').send(JSON.stringify(status))
+})
 function test(A){
   if (A == "equ"){
     return "has_equipment"
@@ -369,13 +376,6 @@ client.on('message', message => {
         console.log(e)
       }
     }
-  }else if(message.content === "お掃除終了～" && message.author.id == "537560435336151041"　&& message.channel.id == '593809602294841357'){
-    status = require(pass + '/status.json')
-    for (let set = 0;set < status.status.length;set ++){
-      status.status[set].login = "未"
-    }
-    console.log(JSON.stringify(status))
-    client.channels.get('618798426758447114').send(JSON.stringify(status))
   }else if(message.content.startsWith("/")){
     let command = message.content.replace("/","").split(" ")
     if(command == ""){
