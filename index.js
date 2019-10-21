@@ -152,7 +152,7 @@ let component = [
 ]
 let pass = __dirname;
 
-cron.schedule('0 0 0 * * *', ()={
+cron.schedule('0 0 0 * * *', ()=>{
   for (let set = 0;set < status.status.length;set ++){
     status.status[set].login = "未"
   }
