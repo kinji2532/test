@@ -837,15 +837,15 @@ client.on('message', message => {
           })
         }
       })
-      for(let co = 0;co < component.lists.length;co ++){
-        if(component.lists[co].name.match(command[1])){
-          let com = JSON.stringify(component.lists[co].value,null,2).replace(/^{\n|\n}$/g,'').split('\n')
-          for(let l = 0;l < com.length;l++){
-            com[l] = "    " + com[l]
-          }
-          message.channel.send(`\`\`\`\n${com.join('\n')}\n\`\`\``)
-        }
-      }
+      // for(let co = 0;co < component.lists.length;co ++){
+      //   if(component.lists[co].name.match(command[1])){
+      //     let com = JSON.stringify(component.lists[co].value,null,2).replace(/^{\n|\n}$/g,'').split('\n')
+      //     for(let l = 0;l < com.length;l++){
+      //       com[l] = "    " + com[l]
+      //     }
+      //     message.channel.send(`\`\`\`\n${com.join('\n')}\n\`\`\``)
+      //   }
+      // }
     }
   }else if(message.content.startsWith("(")){
     let random = Math.floor(Math.random() * 4);
