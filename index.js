@@ -6,7 +6,7 @@ const cron = require('node-cron');
 let one,two,logmessage,el,dummy,replay,status,chickenji,memo,statusedit,memoedit,component;
 let dl = [];
 let saymode = true
-/*let component = [
+let componentlist = [
   {
     "name":"minecraft:behavior.avoid_mob_type",
     "value": `
@@ -150,7 +150,7 @@ let saymode = true
     "name":"",
     "value": ``
   }
-]*/
+]
 let pass = __dirname;
 
 cron.schedule('0 0 0 * * *', ()=>{
