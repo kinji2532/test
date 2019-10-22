@@ -825,6 +825,7 @@ client.on('message', message => {
         }
       }
     }else if(command[0] == "search" || command[0] == "s"){
+      let count = 0;
       client.channels.get('636183414084468737').fetchMessages({ limit: 1 }).then(messages =>{
         for(data of messages){
           data[1].attachments.forEach(attachment=>{
@@ -833,14 +834,16 @@ client.on('message', message => {
             request.get(attachment.url).on('error',console.error).pipe(write)
             write.on('finish',()=>{
               component = JSON.parse(fs.readFileSync(filename,'utf-8'))
-              console.log(component)
-              for(let co = 0;co < component.lists.length;co ++){
-                if(component.lists[co].name.match(command[1])){
-                  let com = JSON.stringify(component.lists[co].value,null,2).replace(/^{\n|\n}$/g,'').split('\n')
-                  for(let l = 0;l < com.length;l++){
-                    com[l] = "    " + com[l]
+              if(command[1] != undefined){
+                for(let co = 0;co < component.lists.length;co ++){
+                  if(component.lists[co].name.match(command[1]) && count < 20){
+                    count ++;
+                    let com = JSON.stringify(component.lists[co].value,null,2).replace(/^{\n|\n}$/g,'').split('\n')
+                    for(let l = 0;l < com.length;l++){
+                      com[l] = "    " + com[l]
+                    }
+                    message.channel.send(`\`\`\`\n${com.join('\n')}\n\`\`\``)
                   }
-                  message.channel.send(`\`\`\`\n${com.join('\n')}\n\`\`\``)
                 }
               }
             })
