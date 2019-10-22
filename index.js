@@ -364,7 +364,11 @@ client.on('message', message => {
       randoms = Math.floor(Math.random() * chickenji.rare.length)
       message.channel.send(chickenji.rare[randoms])
     }else{
-      message.channel.send(chickenji.normal);
+      if(message.content === "ちきんじ"){
+        message.channel.send(chickenji.normal[0]);
+      }else{
+        message.channel.send(chickenji.normal[1]);
+      }
     }
   }else if(message.content.startsWith("//test") || message.channel.id == "599272915153715201" ){
     if(message.author.id == '395010195090178058'){
