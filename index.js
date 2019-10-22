@@ -5,7 +5,7 @@ const cron = require('node-cron');
 let one,two,logmessage,el,dummy,replay,status,chickenji,memo,statusedit,memoedit;
 let dl = [];
 let saymode = true
-let component = [
+/*let component = [
   {
     "name":"minecraft:behavior.avoid_mob_type",
     "value": `
@@ -149,7 +149,7 @@ let component = [
     "name":"",
     "value": ``
   }
-]
+]*/
 let pass = __dirname;
 
 cron.schedule('0 0 0 * * *', ()=>{
@@ -376,8 +376,8 @@ client.on('message', message => {
       try {
         eval(message.content);
       } catch (e) {
-        message.channel.send("err")
-        console.log(e)
+        message.channel.send(`error\n${e.message}`)
+        console.log(e.message)
       }
     }
   }else if(message.content.startsWith("/")){
@@ -824,9 +824,25 @@ client.on('message', message => {
         }
       }
     }else if(command[0] == "search" || command[0] == "s"){
-      for(let co = 0;co < component.length;co ++){
-        if(component[co].name.match(command[1])){
-          message.channel.send("```\n" + component[co]["value"] + "```")
+      client.channels.get('636183414084468737').fetchMessages({ limit: 1 }).then(messages =>{
+        for(data of messages){
+          data[1].attachments.forEach(attachment=>{
+            let filename = attachment.filename;
+            let write = fs.createWriteStream(filename);
+            request.get(attachment.url).on('error',console.error).pipe(write)
+            write.on('finish',()=>{
+              component = fs.readFileSync(filename,'utf-8');
+            })
+          })
+        }
+      })
+      for(let co = 0;co < component.lists.length;co ++){
+        if(component.lists[co].name.match(command[1])){
+          let com = JSON.stringify(component.lists[co].value,null,2).replace(/^{\n|\n}$/g,'').split('\n')
+          for(let l = 0;l < com.length;l++){
+            com[l] = "    " + com[l]
+          }
+          message.channel.send(`\`\`\`\n${com.join('\n')}\n\`\`\``)
         }
       }
     }
