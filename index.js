@@ -831,21 +831,21 @@ client.on('message', message => {
             let write = fs.createWriteStream(filename);
             request.get(attachment.url).on('error',console.error).pipe(write)
             write.on('finish',()=>{
-              component = require('/app/'+filename)
+              component = JSON.parse(fs.readFileSync(filename,'utf-8'))
               console.log(component)
+              for(let co = 0;co < component.lists.length;co ++){
+                if(component.lists[co].name.match(command[1])){
+                  let com = JSON.stringify(component.lists[co].value,null,2).replace(/^{\n|\n}$/g,'').split('\n')
+                  for(let l = 0;l < com.length;l++){
+                    com[l] = "    " + com[l]
+                  }
+                  message.channel.send(`\`\`\`\n${com.join('\n')}\n\`\`\``)
+                }
+              }
             })
           })
         }
       })
-      // for(let co = 0;co < component.lists.length;co ++){
-      //   if(component.lists[co].name.match(command[1])){
-      //     let com = JSON.stringify(component.lists[co].value,null,2).replace(/^{\n|\n}$/g,'').split('\n')
-      //     for(let l = 0;l < com.length;l++){
-      //       com[l] = "    " + com[l]
-      //     }
-      //     message.channel.send(`\`\`\`\n${com.join('\n')}\n\`\`\``)
-      //   }
-      // }
     }
   }else if(message.content.startsWith("(")){
     let random = Math.floor(Math.random() * 4);
@@ -890,8 +890,6 @@ heroku git:remote -a kinjisbot
 git add .
 git commit -m "First commit"
 git push heroku master --force
-heroku logs -a kinjisbot
-node t.js
 */
 
 /*memo
