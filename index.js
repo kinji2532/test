@@ -832,6 +832,7 @@ client.on('message', message => {
             request.get(attachment.url).on('error',console.error).pipe(write)
             write.on('finish',()=>{
               component = JSON.parse(fs.readFileSync(filename,'utf-8'))
+              console.log(component)
             })
           })
         }
