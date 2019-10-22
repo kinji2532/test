@@ -2,7 +2,7 @@ const { Client, Attachment } = require('discord.js');
 const client = new Client();
 const fs = require('fs');
 const cron = require('node-cron');
-let one,two,logmessage,el,dummy,replay,status,chickenji,memo,statusedit,memoedit;
+let one,two,logmessage,el,dummy,replay,status,chickenji,memo,statusedit,memoedit,component;
 let dl = [];
 let saymode = true
 /*let component = [
