@@ -3,6 +3,17 @@ const client = new Client();
 const fs = require('fs');
 const request = require('request');
 const cron = require('node-cron');
+const log4js = require('log4js')
+
+log4js.configure({
+  appenders: {
+    system: { type: 'file', filename: './logs/system.log' }
+  },
+  categories: {
+    default: { appenders: ['system'], level: 'debug' },
+  }
+});
+const logger = log4js.getLogger('system');
 
 process.on('uncaughttException',(err)=>{
   client.channels.get('599272915153715201').send("予期せぬエラーが起きたよ！");
