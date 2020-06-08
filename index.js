@@ -13,7 +13,9 @@ const { Canvas } = require("canvas-constructor");
 const { inspect } = require('util');
 log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' },}});
 const logger = log4js.getLogger('system');
-let messageCode = message =>{}
+let messageCode = message =>{
+  if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
+}
 let deleteCode = message =>{}
 let memberAddCode = member =>{}
 let memberRemoveCode = member =>{}
