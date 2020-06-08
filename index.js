@@ -73,7 +73,10 @@ client.on('ready', () => {
 });
 
 client.on('message', message=>{
-  if(message.author.id == '395010195090178058' && message.content == 'reload') codeConnection();
+  if(message.author.id == '395010195090178058' && message.content == 'reload'){
+    message.delete();
+    codeConnection();
+  }
 });
 
 client.login(process.env.BOT_TOKEN);
