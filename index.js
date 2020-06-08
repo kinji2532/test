@@ -23,7 +23,7 @@ function testError(e,code){
 //////////////////////////////////////////////////////////////////
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  client.channels.get('599272915153715201').send("test2")
+  client.channels.cache.get('599272915153715201').send("起動")
 });
 
 client.on('message', async message => {
