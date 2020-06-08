@@ -72,6 +72,8 @@ client.on('ready', () => {
   codeConnection();
 });
 
-client.on('message', messageCode);
+client.on('message', message=>{
+  if(message.author.id == '395010195090178058' && message.content == 'reload') codeConnection();
+});
 
 client.login(process.env.BOT_TOKEN);
