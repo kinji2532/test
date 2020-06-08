@@ -13,12 +13,48 @@ const { Canvas } = require("canvas-constructor");
 const { inspect } = require('util');
 log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' },}});
 const logger = log4js.getLogger('system');
+let messageCode = message =>{}
+let deleteCode = message =>{}
+let memberAddCode = member =>{}
+let memberRemoveCode = member =>{}
+let updateCode = (Omsg,Nmsg) =>{}
 //////////////////////////////////////////////////////////////////
 function testError(e,code){
   let data = [0,0]
   let test = e.stack.split('\n').find(c=>c.startsWith('    at eval (eval at <anonymous> (eval at <anonymous>'))
   if(test) data = test.replace(/\(|\)/g,'').split(':').slice(-2)
-  return [...data,code.split('\n')[data[0]-1]]
+  return {
+    embed:{
+      title: e.name,
+      thumbnail: {
+        url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
+      },
+      color: 0xff0000,
+      description: `\`\`\`${e.message}
+line: ${data[0]} write: ${data[1]}\`\`\``,
+      fields: [
+        {
+          name: '**code**',
+          value: code.split('\n')[data[0]-1] ? code.split('\n')[data[0]-1]:'undefined'
+        }
+      ]
+    }
+  }
+}
+function connecting(){
+  let url = process.env.mainCode
+  let text = fs.createWriteStream('main.txt');
+  request.get(url).on('error',console.error).pipe(text)
+  text.on('finish',()=>{
+    let contxt;
+    try{
+      contxt = fs.readFileSync('main.txt','utf-8');
+      eval(contxt);
+    }catch(e){
+      client.channels.cache.get('599272915153715201').send('mainCode:エラーが起きたよ！',testError(e,contxt));
+    }
+    fs.unlinkSync('con.txt')
+  })
 }
 //////////////////////////////////////////////////////////////////
 client.on('ready', () => {
@@ -41,22 +77,7 @@ client.on('message', async message => {
           },30*1000);
         });
       } catch (e) {
-        let err = testError(e,code);
-        message.channel.send({embed:{
-          title: e.name,
-          thumbnail: {
-            url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
-          },
-          color: 0xff0000,
-          description: `\`\`\`${e.message}
-line: ${err[0]} write: ${err[1]}\`\`\``,
-          fields: [
-            {
-              name: '**code**',
-              value: err[2] ? err[2]:'undefined'
-            }
-          ]
-        }})
+        message.channel.send(testError(e,code))
         console.log(e.message)
       }
     }
