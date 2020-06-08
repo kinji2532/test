@@ -21,7 +21,7 @@ let memberAddCode = member =>{}
 let memberRemoveCode = member =>{}
 let updateCode = (Omsg,Nmsg) =>{}
 //////////////////////////////////////////////////////////////////
-function testError(e,code){
+function testError(e,code,revision){
   let data = [0,0]
   let test = e.stack.split('\n').find(c=>c.match('eval'));
   if(test) data = test.replace(/\(|\)/g,'').split(':').slice(-2)
@@ -33,7 +33,7 @@ function testError(e,code){
       },
       color: 0xff0000,
       description: `\`\`\`${e.message}
-line: ${data[0]} write: ${data[1]}\`\`\``,
+line: ${data[0]} write: ${data[1]-revision}\`\`\``,
       fields: [
         {
           name: '**code**',
