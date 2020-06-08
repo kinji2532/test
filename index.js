@@ -56,11 +56,6 @@ function codeConnection(){
       client.channels.cache.get('599272915153715201').send('mainCode:エラーが起きたよ！',testError(e,contxt));
     }
     fs.unlinkSync('main.txt')
-    console.log(messageCode)
-    console.log(deleteCode)
-    console.log(updateCode)
-    console.log(memberAddCode)
-    console.log(memberRemoveCode)
   })
 }
 //////////////////////////////////////////////////////////////////
