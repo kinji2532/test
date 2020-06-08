@@ -53,35 +53,17 @@ function codeConnection(){
     }catch(e){
       client.channels.cache.get('599272915153715201').send('mainCode:エラーが起きたよ！',testError(e,contxt));
     }
-    await fs.unlinkSync('con.txt')
+    fs.unlinkSync('main.txt')
   })
 }
 //////////////////////////////////////////////////////////////////
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
-  client.channels.cache.get('599272915153715201').send("起動")
+  const channel = client.channels.cache.get('599272915153715201');
+  channel.bulkDelete(100);
+  channel.send("起動");
 });
 
-client.on('message', async message => {
-  if(!message.author.bot){
-    if(message.content.startsWith("/code")){
-      let code = message.content.replace(/\/code\n|client.destroy()/g,"")
-      try {
-        let data = await eval(message.content.replace(/\/code\n|client.destroy()/g,""))
-        message.channel.send(inspect(data).slice(0,10000),{split:true}).then(msg=>{
-          setTimeout(()=>{
-            if(msg instanceof Array){
-              for(data of msg) data.delete()
-            }
-            else msg.delete()
-          },30*1000);
-        });
-      } catch (e) {
-        message.channel.send(testError(e,code))
-        console.log(e.message)
-      }
-    }
-  }
-});
+client.on('message', messageCode);
 
 client.login(process.env.BOT_TOKEN);
