@@ -23,7 +23,7 @@ let updateCode = (Omsg,Nmsg) =>{}
 //////////////////////////////////////////////////////////////////
 function testError(e,code){
   let data = [0,0]
-  let test = e.stack.split('\n').find(c=>c.startsWith('    at eval (eval at <anonymous> (eval at <anonymous>'))
+  let test = e.stack.split('\n').find(c=>c.match('eval'));
   if(test) data = test.replace(/\(|\)/g,'').split(':').slice(-2)
   return {
     embed:{
