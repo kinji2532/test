@@ -41,11 +41,11 @@ line: ${data[0]} write: ${data[1]}\`\`\``,
     }
   }
 }
-async function codeConnection(){
+function codeConnection(){
   let url = process.env.mainCode
   let text = fs.createWriteStream('main.txt');
   request.get(url).on('error',console.error).pipe(text)
-  text.on('finish',()=>{
+  text.on('finish',async ()=>{
     let contxt;
     try{
       contxt = fs.readFileSync('main.txt','utf-8');
