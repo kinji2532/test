@@ -62,6 +62,7 @@ client.on('ready', () => {
   const channel = client.channels.cache.get('599272915153715201');
   channel.bulkDelete(100);
   channel.send("起動");
+  codeConnection();
 });
 
 client.on('message', messageCode);
