@@ -16,10 +16,7 @@ const logger = log4js.getLogger('system');
 let messageCode = message =>{
   if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
 }
-let deleteCode = message =>{}
-let memberAddCode = member =>{}
-let memberRemoveCode = member =>{}
-let updateCode = (Omsg,Nmsg) =>{}
+let deleteCode,memberAddCode,memberRemoveCode,updateCode
 //////////////////////////////////////////////////////////////////
 function testError(e,code,revision){
   let data = [0,0]
