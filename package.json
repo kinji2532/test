@@ -20,6 +20,7 @@
     "node-unzip-2": "^0.2.8",
     "request": "^2.88.2",
     "rimraf": "^3.0.2",
-    "zip-folder": "^1.0.0"
+    "zip-folder": "^1.0.0",
+    "pg": "^8.2.1"
   }
 }
