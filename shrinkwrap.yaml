@@ -5,6 +5,7 @@ dependencies:
   log4js: 6.3.0
   node-cron: 2.0.3
   node-unzip-2: 0.2.8
+  pg: 8.2.1
   request: 2.88.2
   rimraf: 3.0.2
   zip-folder: 1.0.0
@@ -144,6 +145,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI=
+  /buffer-writer/2.0.0:
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-a7ZpuTZU1TRtnwyCNW3I5dc0wWNC3VR9S++Ewyk2HHZdrO3CQJqSpd+95Us590V6AL7JqUAH2IwZ/398PmNFgw==
   /buffers/0.1.1:
     dev: false
     engines:
@@ -811,6 +818,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-8phS5w/X4l82DgE6jsRMgq7bVwg=
+  /packet-reader/1.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-HAKu/fG3HpHFO0AA8WE8q2g+gBJaZ9MG7fcKk+IJPLTGAD6Psw4443l+9DGRbOIh3/aXr7Phy0TjilYivJo5XQ==
   /path-is-absolute/1.0.1:
     dev: false
     engines:
@@ -821,6 +832,85 @@ packages:
     dev: false
     resolution:
       integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
+  /pg-connection-string/2.2.3:
+    dev: false
+    resolution:
+      integrity: sha512-I/KCSQGmOrZx6sMHXkOs2MjddrYcqpza3Dtsy0AjIgBr/bZiPJRK9WhABXN1Uy1UDazRbi9gZEzO2sAhL5EqiQ==
+  /pg-int8/1.0.1:
+    dev: false
+    engines:
+      node: '>=4.0.0'
+    resolution:
+      integrity: sha512-WCtabS6t3c8SkpDBUlb1kjOs7l66xsGdKpIPZsg4wR+B3+u9UAum2odSsF9tnvxg80h4ZxLWMy4pRjOsFIqQpw==
+  /pg-pool/3.2.1:
+    dev: false
+    peerDependencies:
+      pg: '>=8.0'
+    resolution:
+      integrity: sha512-BQDPWUeKenVrMMDN9opfns/kZo4lxmSWhIqo+cSAF7+lfi9ZclQbr9vfnlNaPr8wYF3UYjm5X0yPAhbcgqNOdA==
+  /pg-protocol/1.2.4:
+    dev: false
+    resolution:
+      integrity: sha512-/8L/G+vW/VhWjTGXpGh8XVkXOFx1ZDY+Yuz//Ab8CfjInzFkreI+fDG3WjCeSra7fIZwAFxzbGptNbm8xSXenw==
+  /pg-types/2.2.0:
+    dependencies:
+      pg-int8: 1.0.1
+      postgres-array: 2.0.0
+      postgres-bytea: 1.0.0
+      postgres-date: 1.0.5
+      postgres-interval: 1.2.0
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-qTAAlrEsl8s4OiEQY69wDvcMIdQN6wdz5ojQiOy6YRMuynxenON0O5oCpJI6lshc6scgAY8qvJ2On/p+CXY0GA==
+  /pg/8.2.1:
+    dependencies:
+      buffer-writer: 2.0.0
+      packet-reader: 1.0.0
+      pg-connection-string: 2.2.3
+      pg-pool: 3.2.1
+      pg-protocol: 1.2.4
+      pg-types: 2.2.0
+      pgpass: 1.0.2
+      semver: 4.3.2
+    dev: false
+    engines:
+      node: '>= 8.0.0'
+    resolution:
+      integrity: sha512-DKzffhpkWRr9jx7vKxA+ur79KG+SKw+PdjMb1IRhMiKI9zqYUGczwFprqy+5Veh/DCcFs1Y6V8lRLN5I1DlleQ==
+  /pgpass/1.0.2:
+    dependencies:
+      split: 1.0.1
+    dev: false
+    resolution:
+      integrity: sha1-Knu0G2BltnkH6R2hsHwYR8h3swY=
+  /postgres-array/2.0.0:
+    dev: false
+    engines:
+      node: '>=4'
+    resolution:
+      integrity: sha512-VpZrUqU5A69eQyW2c5CA1jtLecCsN2U/bD6VilrFDWq5+5UIEVO7nazS3TEcHf1zuPYO/sqGvUvW62g86RXZuA==
+  /postgres-bytea/1.0.0:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-AntTPAqokOJtFy1Hz5zOzFIazTU=
+  /postgres-date/1.0.5:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-pdau6GRPERdAYUQwkBnGKxEfPyhVZXG/JiS44iZWiNdSOWE09N2lUgN6yshuq6fVSon4Pm0VMXd1srUUkLe9iA==
+  /postgres-interval/1.2.0:
+    dependencies:
+      xtend: 4.0.2
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==
   /prism-media/1.2.2:
     dev: false
     peerDependencies:
@@ -961,6 +1051,11 @@ packages:
     dev: false
     resolution:
       integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
+  /semver/4.3.2:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha1-x6BxWKgL7dBSNVt3DYLWZA+AO+c=
   /semver/5.7.1:
     dev: false
     hasBin: true
@@ -1000,6 +1095,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-WzO9ZvATsaf4ZGCwPUY97DmtPqA=
+  /split/1.0.1:
+    dependencies:
+      through: 2.3.8
+    dev: false
+    resolution:
+      integrity: sha512-mTyOoPbrivtXnwnIxZRFYRrPNtEFKlpB2fvjSnCQUiAA6qAZzqwna5envK4uk6OIeP17CsdF3rSBGYVBsU0Tkg==
   /sshpk/1.16.1:
     dependencies:
       asn1: 0.2.4
@@ -1103,6 +1204,10 @@ packages:
       node: '>=4.5'
     resolution:
       integrity: sha512-w2VwSrBoHa5BsSyH+KxEqeQBAllHhccyMFVHtGtdMpF4W7IRWfZjFiQceJPChOeTsSDVUpER2T8FA93pr0L+QA==
+  /through/2.3.8:
+    dev: false
+    resolution:
+      integrity: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
   /tough-cookie/2.5.0:
     dependencies:
       psl: 1.8.0
@@ -1220,6 +1325,7 @@ specifiers:
   log4js: ^6.2.1
   node-cron: ^2.0.3
   node-unzip-2: ^0.2.8
+  pg: ^8.2.1
   request: ^2.88.2
   rimraf: ^3.0.2
   zip-folder: ^1.0.0
