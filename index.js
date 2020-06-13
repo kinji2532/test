@@ -17,7 +17,7 @@ let messageCode = message =>{
   if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
 }
 let unhandledCode = () => {}
-letuncaughtCode = () => {}
+let uncaughtCode = () => {}
 let deleteCode = () => {}
 let memberAddCode = () => {}
 let memberRemoveCode = () => {}
