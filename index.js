@@ -16,6 +16,8 @@ const logger = log4js.getLogger('system');
 let messageCode = message =>{
   if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
 }
+let unhandledCode = () => {}
+letuncaughtCode = () => {}
 let deleteCode = () => {}
 let memberAddCode = () => {}
 let memberRemoveCode = () => {}
