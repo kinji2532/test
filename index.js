@@ -22,6 +22,8 @@ let deleteCode = () => {}
 let memberAddCode = () => {}
 let memberRemoveCode = () => {}
 let updateCode = () => {}
+let reactionAddCode = () => {}
+let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
 function testError(e,code,revision){
   let data = [0,0]
