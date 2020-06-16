@@ -1,4 +1,4 @@
-//////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
 const { Client, MessageAttachment } = require('discord.js');
 const client = new Client();
 const fs = require('fs');
@@ -48,18 +48,12 @@ line: ${data[0]} write: ${data[1]-revision}\`\`\``,
   }
 }
 function codeConnection(){
-  let url = process.env.mainCode
-  let text = fs.createWriteStream('main.txt');
-  request.get(url).on('error',console.error).pipe(text)
-  text.on('finish',async ()=>{
-    let contxt;
+  request(process.env.mainCode,(e,r,body)=>{
     try{
-      contxt = fs.readFileSync('main.txt','utf-8');
-      await eval(contxt);
+      eval(body);
     }catch(e){
       client.channels.cache.get('599272915153715201').send('mainCode:エラーが起きたよ！',testError(e,contxt));
     }
-    fs.unlinkSync('main.txt')
   })
 }
 //////////////////////////////////////////////////////////////////
