@@ -52,7 +52,7 @@ function codeConnection(){
     try{
       eval(body);
     }catch(e){
-      client.channels.cache.get('599272915153715201').send('mainCode:エラーが起きたよ！',testError(e,contxt));
+      client.channels.cache.get('599272915153715201').send('mainCode:エラーが起きたよ！',testError(e,body));
     }
   })
 }
