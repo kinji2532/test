@@ -22,6 +22,7 @@
     "rimraf": "^3.0.2",
     "zip-folder": "^1.0.0",
     "keyv": "^4.0.1",
-    "@keyv/sqlite": "^2.0.2"
+    "@keyv/sqlite": "^2.0.2",
+    "mysql": "^2.18.1"
   }
 }
