@@ -17,7 +17,7 @@
     "log4js": "^6.2.1",
     "rimraf": "^3.0.2",
     "request": "^2.88.2",
-    "node-cron": "^2.0.3",
+    "node-cron": "^2.0.3"
     "zip-folder": "^1.0.0",
     "discord.js": "^12.2.0",
     "node-unzip-2": "^0.2.8",
