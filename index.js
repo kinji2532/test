@@ -7,8 +7,8 @@ const cron = require('node-cron');
 const log4js = require('log4js');
 const path = require("path");
 const https = require("https");
-const rimraf = require("rimraf");
-const zipfolder = require("zip-folder");
+const rimraf = require("rimraf")
+const zipfolder = require("zip-folder")
 const { Canvas } = require("canvas-constructor");
 const { inspect } = require('util');
 log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' },}});
@@ -70,6 +70,15 @@ client.on('message', message=>{
     message.delete();
     codeConnection();
   }
+});
+
+process.on('unhandledRejection',async error => {
+  client.channels.cache.get('599272915153715201').send(inspect(error),{split:true}).then(msg=>setTimeout(()=>msg.delete(),60000))
+});
+
+process.on('uncaughtException',async (reason,p) => {
+  client.channels.cache.get('599272915153715201').send(inspect(reason),{split:true}).then(msg=>setTimeout(()=>msg.delete(),60000))
+  client.channels.cache.get('599272915153715201').send(inspect(p),{split:true}).then(msg=>setTimeout(()=>msg.delete(),60000))
 });
 
 client.login(process.env.BOT_TOKEN);
