@@ -25,7 +25,7 @@ let updateCode = () => {}
 let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
-function testError(e,code,revision){
+function testError(e,code="",revision=0){
   let data = [0,0]
   let test = e.stack.split('\n').find(c=>c.match('eval'));
   if(test) data = test.replace(/\(|\)/g,'').split(':').slice(-2)
