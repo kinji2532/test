@@ -73,11 +73,7 @@ client.on('message', message=>{
 });
 
 process.on('unhandledRejection',async error => {
-  client.channels.cache.get('599272915153715201').send('unhandled:'+inspect(error),{split:true}).then(msg=>setTimeout(()=>try{msg.delete()}catch{},5000))
-});
-
-process.on('uncaughtException',async (reason,p) => {
-  client.channels.cache.get('599272915153715201').send('uncaught:'+inspect(reason),{split:true}).then(msg=>setTimeout(()=>try{msg.delete()}catch{},5000))
+  client.channels.cache.get('599272915153715201').send('unhandled:'+inspect(error),{split:true}).then(msg=>setTimeout(()=>msg.delete(),5000))
 });
 
 client.login(process.env.BOT_TOKEN);
