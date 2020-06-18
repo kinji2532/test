@@ -1,11 +1,11 @@
 dependencies:
+  '@keyv/postgres': 1.0.16
   '@keyv/sqlite': 2.0.2
   canvas: 2.6.1
   canvas-constructor: 3.2.0
   discord.js: 12.2.0
   keyv: 4.0.1
   log4js: 6.3.0
-  mysql: 2.18.1
   node-cron: 2.0.3
   node-unzip-2: 0.2.8
   request: 2.88.2
@@ -26,6 +26,13 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-ZfFsbgEXW71Rw/6EtBdrP5VxBJy4dthyC0tpQKGKmYFImlmmrykO14Za+BiIVduwjte0jXEBlhSKf0MWbFp9Eg==
+  /@keyv/postgres/1.0.16:
+    dependencies:
+      '@keyv/sql': 1.1.2
+      pg: /pg/7.4.1/pg@7.4.1
+    dev: false
+    resolution:
+      integrity: sha512-gmradhx47OwpZtcHcsEgQoOcTS562f7XjBCacVNaFQqeSeKymeV5UAOiwQIYREo7oOSB9WPGMc/1YV+lnMDemA==
   /@keyv/sql/1.1.2:
     dependencies:
       sql: 0.78.0
@@ -137,10 +144,6 @@ packages:
     dev: false
     resolution:
       integrity: sha1-pDAdOJtqQ/m2f/PKEaP2Y342Dp4=
-  /bignumber.js/9.0.0:
-    dev: false
-    resolution:
-      integrity: sha512-t/OYhhJ2SD+YGBQcjY8GzzDHEk9f3nerxjtfa6tlMXfe7frs/WozhvCNoGvpM0P3bNf3Gq5ZRMlGr5f3r4/N8A==
   /binary/0.3.0:
     dependencies:
       buffers: 0.1.1
@@ -165,6 +168,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI=
+  /buffer-writer/1.0.1:
+    dev: false
+    resolution:
+      integrity: sha1-Iqk2kB4wKa/NdUfrRIfOtpejvwg=
   /buffers/0.1.1:
     dev: false
     engines:
@@ -556,6 +563,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-R+Y/evVa+m+S4VAOaQ64uFKcCZo=
+  /js-string-escape/1.0.1:
+    dev: false
+    engines:
+      node: '>= 0.8'
+    resolution:
+      integrity: sha1-4mJbrbwNZ8dTPp7cEGjFh65BN+8=
   /jsbn/0.1.1:
     dev: false
     resolution:
@@ -703,17 +716,6 @@ packages:
     dev: false
     resolution:
       integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
-  /mysql/2.18.1:
-    dependencies:
-      bignumber.js: 9.0.0
-      readable-stream: 2.3.7
-      safe-buffer: 5.1.2
-      sqlstring: 2.3.1
-    dev: false
-    engines:
-      node: '>= 0.6'
-    resolution:
-      integrity: sha512-Bca+gk2YWmqp2Uf6k5NFEurwY/0td0cpebAucFpY/3jhrwrVGuxU2uQFCHjU19SJfje0yQvi+rVWdq78hR5lig==
   /nan/2.14.1:
     dev: false
     resolution:
@@ -857,6 +859,10 @@ packages:
     dev: false
     resolution:
       integrity: sha1-8phS5w/X4l82DgE6jsRMgq7bVwg=
+  /packet-reader/0.3.1:
+    dev: false
+    resolution:
+      integrity: sha1-zWLmCvjX/qinBexP+ZCHHEaHHyc=
   /path-is-absolute/1.0.1:
     dev: false
     engines:
@@ -867,12 +873,82 @@ packages:
     dev: false
     resolution:
       integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=
+  /pg-connection-string/0.1.3:
+    dev: false
+    resolution:
+      integrity: sha1-2hhHsglA5C7hSSvq9l1J2RskXfc=
+  /pg-pool/2.0.10/pg@7.4.1:
+    dependencies:
+      pg: /pg/7.4.1/pg@7.4.1
+    dev: false
+    id: registry.npmjs.org/pg-pool/2.0.10
+    peerDependencies:
+      pg: '>5.0'
+    resolution:
+      integrity: sha512-qdwzY92bHf3nwzIUcj+zJ0Qo5lpG/YxchahxIN8+ZVmXqkahKXsnl2aiJPHLYN9o5mB/leG+Xh6XKxtP7e0sjg==
+  /pg-types/1.12.1:
+    dependencies:
+      postgres-array: 1.0.3
+      postgres-bytea: 1.0.0
+      postgres-date: 1.0.5
+      postgres-interval: 1.2.0
+    dev: false
+    resolution:
+      integrity: sha1-1kCH45A7WP+q0nnnWVxSIIoUw9I=
+  /pg/7.4.1/pg@7.4.1:
+    dependencies:
+      buffer-writer: 1.0.1
+      js-string-escape: 1.0.1
+      packet-reader: 0.3.1
+      pg-connection-string: 0.1.3
+      pg-pool: /pg-pool/2.0.10/pg@7.4.1
+      pg-types: 1.12.1
+      pgpass: 1.0.2
+      semver: 4.3.2
+    dev: false
+    engines:
+      node: '>= 4.5.0'
+    id: registry.npmjs.org/pg/7.4.1
+    resolution:
+      integrity: sha512-Pi5qYuXro5PAD9xXx8h7bFtmHgAQEG6/SCNyi7gS3rvb/ZQYDmxKchfB0zYtiSJNWq9iXTsYsHjrM+21eBcN1A==
+  /pgpass/1.0.2:
+    dependencies:
+      split: 1.0.1
+    dev: false
+    resolution:
+      integrity: sha1-Knu0G2BltnkH6R2hsHwYR8h3swY=
   /pify/3.0.0:
     dev: false
     engines:
       node: '>=4'
     resolution:
       integrity: sha1-5aSs0sEB/fPZpNB/DbxNtJ3SgXY=
+  /postgres-array/1.0.3:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-5wClXrAP0+78mcsNX3/ithQ5exKvCyK5lr5NEEEeGwwM6NJdQgzIJBVxLvRW+huFpX92F2QnZ5CcokH0VhK2qQ==
+  /postgres-bytea/1.0.0:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-AntTPAqokOJtFy1Hz5zOzFIazTU=
+  /postgres-date/1.0.5:
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-pdau6GRPERdAYUQwkBnGKxEfPyhVZXG/JiS44iZWiNdSOWE09N2lUgN6yshuq6fVSon4Pm0VMXd1srUUkLe9iA==
+  /postgres-interval/1.2.0:
+    dependencies:
+      xtend: 4.0.2
+    dev: false
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-9ZhXKM/rw350N1ovuWHbGxnGh/SNJ4cnxHiM0rxE4VN41wsg8P8zWn9hv/buK00RP4WvlOyr/RBDiptyxVbkZQ==
   /prism-media/1.2.2:
     dev: false
     peerDependencies:
@@ -1013,6 +1089,11 @@ packages:
     dev: false
     resolution:
       integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
+  /semver/4.3.2:
+    dev: false
+    hasBin: true
+    resolution:
+      integrity: sha1-x6BxWKgL7dBSNVt3DYLWZA+AO+c=
   /semver/5.7.1:
     dev: false
     hasBin: true
@@ -1056,6 +1137,12 @@ packages:
     dev: false
     resolution:
       integrity: sha1-XtwETKTrb3gW1Qui/GPiXY/kcH8=
+  /split/1.0.1:
+    dependencies:
+      through: 2.3.8
+    dev: false
+    resolution:
+      integrity: sha512-mTyOoPbrivtXnwnIxZRFYRrPNtEFKlpB2fvjSnCQUiAA6qAZzqwna5envK4uk6OIeP17CsdF3rSBGYVBsU0Tkg==
   /sql/0.78.0:
     dependencies:
       lodash: 4.1.0
@@ -1071,12 +1158,6 @@ packages:
     requiresBuild: true
     resolution:
       integrity: sha512-roEOz41hxui2Q7uYnWsjMOTry6TcNUNmp8audCx18gF10P2NknwdpF+E+HKvz/F2NvPKGGBF4NGc+ZPQ+AABwg==
-  /sqlstring/2.3.1:
-    dev: false
-    engines:
-      node: '>= 0.6'
-    resolution:
-      integrity: sha1-R1OT/56RR5rqYtyvDKPRSYOn+0A=
   /sshpk/1.16.1:
     dependencies:
       asn1: 0.2.4
@@ -1180,6 +1261,10 @@ packages:
       node: '>=4.5'
     resolution:
       integrity: sha512-w2VwSrBoHa5BsSyH+KxEqeQBAllHhccyMFVHtGtdMpF4W7IRWfZjFiQceJPChOeTsSDVUpER2T8FA93pr0L+QA==
+  /through/2.3.8:
+    dev: false
+    resolution:
+      integrity: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=
   /tough-cookie/2.5.0:
     dependencies:
       psl: 1.8.0
@@ -1291,13 +1376,13 @@ registry: 'https://registry.npmjs.org/'
 shrinkwrapMinorVersion: 9
 shrinkwrapVersion: 3
 specifiers:
+  '@keyv/postgres': ^1.0.16
   '@keyv/sqlite': ^2.0.2
   canvas: ^2.6.1
   canvas-constructor: ^3.2.0
   discord.js: ^12.2.0
   keyv: ^4.0.1
   log4js: ^6.2.1
-  mysql: ^2.18.1
   node-cron: ^2.0.3
   node-unzip-2: ^0.2.8
   request: ^2.88.2
