@@ -11,6 +11,9 @@
   "engines": {
     "node": "14.x"
   },
+  "resolutions": {
+    "@keyv/postgres/pg": "^8.2.1"
+  },
   "dependencies": {
     "keyv": "^4.0.1",
     "canvas": "^2.6.1",
