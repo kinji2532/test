@@ -73,7 +73,7 @@ client.on('message', message=>{
 });
 
 process.on('unhandledRejection',async error => {
-  client.channels.cache.get('599272915153715201').send('unhandled:'+inspect(error),{split:true}).then(msg=>setTimeout(()=>msg.delete(),5000))
+  client.channels.cache.get('599272915153715201').send('unhandled:'+inspect(error),{split:true}).then(msg=>msg.react('721260517875777546'))
 });
 
 client.login(process.env.BOT_TOKEN);
