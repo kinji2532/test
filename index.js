@@ -25,28 +25,6 @@ let updateCode = () => {}
 let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
-function testError(e,code="",revision=0){
-  let data = [0,0]
-  let test = e.stack.split('\n').find(c=>c.match('eval'));
-  if(test) data = test.replace(/\(|\)/g,'').split(':').slice(-2)
-  return {
-    embed:{
-      title: e.name,
-      thumbnail: {
-        url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
-      },
-      color: 0xff0000,
-      description: `\`\`\`${e.message}
-line: ${data[0]} write: ${data[1]-revision}\`\`\``,
-      fields: [
-        {
-          name: '**code**',
-          value: code.split('\n')[data[0]-1] ? code.split('\n')[data[0]-1]:'undefined'
-        }
-      ]
-    }
-  }
-}
 function codeConnection(){
   request(process.env.mainCode,(e,r,body)=>{
     try{
