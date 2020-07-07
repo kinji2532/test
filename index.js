@@ -25,7 +25,7 @@ const J = {
   }
 }
 let typeError = data => {
-  return data.split(': ');
+  return [];
 }
 let messageCode = message =>{
   if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
@@ -44,12 +44,12 @@ function testError(e,code="",revision=0){
   const message = typeError(`${e.name}: ${e.message}`)
   return {
     embed:{
-      title: message[0],
+      title: (message[0]||e.name),
       thumbnail: {
         url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
       },
       color: 0xff0000,
-      description: `\`\`\`${message[1]}
+      description: `\`\`\`${(message[1]||e.message)}
 line: ${data.line} write: ${data.column-revision}\`\`\``,
       fields: [
         {
