@@ -48,7 +48,7 @@ function testError(e,code="",revision=0){
         url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
       },
       color: 0xff0000,
-      description: `\`\`\`${typeError(e.message)}
+      description: `\`\`\`${typeError(e.toString())}
 line: ${data.line} write: ${data.column-revision}\`\`\``,
       fields: [
         {
