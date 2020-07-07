@@ -54,7 +54,7 @@ line: ${data.line} write: ${data.column-revision}\`\`\``,
       fields: [
         {
           name: '**code**',
-          value: code.split('\n')[data.line-1]||(data.line == 75 ? '実行コード内':'undefined')
+          value: code.split('\n')[data.line-1]||(data.line == 74 ? '実行コード内':'undefined')
         }
       ]
     }
