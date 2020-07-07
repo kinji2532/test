@@ -24,6 +24,9 @@ const J = {
     return this.p(this.s(data));
   }
 }
+let typeError = data => {
+  return data;
+}
 let messageCode = message =>{
   if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
 }
@@ -37,9 +40,7 @@ let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
 function testError(e,code="",revision=0){
-  let data = [0,0]
-  let test = e.stack.split('\n').find(c=>c.match('eval'));
-  if(test) data = test.replace(/\(|\)/g,'').split(':').slice(-2)
+  const data = J.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/).groups)
   return {
     embed:{
       title: e.name,
@@ -47,12 +48,12 @@ function testError(e,code="",revision=0){
         url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
       },
       color: 0xff0000,
-      description: `\`\`\`${e.message}
-line: ${data[0]} write: ${data[1]-revision}\`\`\``,
+      description: `\`\`\`${typeError(e.message)}
+line: ${data.line} write: ${data.column-revision}\`\`\``,
       fields: [
         {
           name: '**code**',
-          value: code.split('\n')[data[0]-1] ? code.split('\n')[data[0]-1]:'undefined'
+          value: code.split('\n')[data.line-1]||'undefined'
         }
       ]
     }
