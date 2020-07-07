@@ -37,7 +37,7 @@ let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
 function testError(e,code="",revision=0){
-  let data = JSON.p(JSON.s(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/).groups)
+  let data = JSON.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/).groups);
   return {
     embed:{
       title: e.name,
