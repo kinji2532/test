@@ -37,7 +37,9 @@ let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
 function testError(e,code="",revision=0){
-  let data = JSON.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/).groups);
+  let data = [0,0]
+  let test = e.stack.split('\n').find(c=>c.match('eval'));
+  if(test) data = test.replace(/\(|\)/g,'').split(':').slice(-2)
   return {
     embed:{
       title: e.name,
@@ -46,11 +48,11 @@ function testError(e,code="",revision=0){
       },
       color: 0xff0000,
       description: `\`\`\`${e.message}
-line: ${data.line} write: ${data.column-revision}\`\`\``,
+line: ${data[0]} write: ${data[1]-revision}\`\`\``,
       fields: [
         {
           name: '**code**',
-          value: code.split('\n')[data.line-1] ? code.split('\n')[data.column-1]:'undefined'
+          value: code.split('\n')[data[0]-1] ? code.split('\n')[data[0]-1]:'undefined'
         }
       ]
     }
