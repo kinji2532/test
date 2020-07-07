@@ -13,6 +13,17 @@ const { Canvas } = require("canvas-constructor");
 const { inspect } = require('util');
 log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' },}});
 const logger = log4js.getLogger('system');
+const JSON = {
+  s:function(data){
+    return JSON.stringify(data);
+  },
+  p:function(data){
+    return JSON.parse(data);
+  },
+  c:function(data){
+    return this.p(this.s(data));
+  }
+}
 let messageCode = message =>{
   if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
 }
@@ -25,6 +36,26 @@ let updateCode = () => {}
 let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
+function testError(e,code="",revision=0){
+  let data = JSON.p(JSON.s(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/).groups)
+  return {
+    embed:{
+      title: e.name,
+      thumbnail: {
+        url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
+      },
+      color: 0xff0000,
+      description: `\`\`\`${e.message}
+line: ${data.line} write: ${data.column-revision}\`\`\``,
+      fields: [
+        {
+          name: '**code**',
+          value: code.split('\n')[data.line-1] ? code.split('\n')[data.column-1]:'undefined'
+        }
+      ]
+    }
+  }
+}
 function codeConnection(){
   request(process.env.mainCode,(e,r,body)=>{
     try{
