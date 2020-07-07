@@ -24,8 +24,8 @@ const J = {
     return this.p(this.s(data));
   }
 }
-let typeError = (name,value) => {
-  return {name:name,value:value};
+let typeError = data => {
+  return data.split(': ');
 }
 let messageCode = message =>{
   if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
@@ -41,15 +41,15 @@ let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
 function testError(e,code="",revision=0){
   const data = J.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/).groups)
-  const message = typeError(e.name,e.message)
+  const message = typeError(`${e.name}: ${e.message}`)
   return {
     embed:{
-      title: message.name,
+      title: message[0],
       thumbnail: {
         url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
       },
       color: 0xff0000,
-      description: `\`\`\`${message.value}
+      description: `\`\`\`${message[1]}
 line: ${data.line} write: ${data.column-revision}\`\`\``,
       fields: [
         {
