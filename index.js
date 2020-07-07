@@ -13,7 +13,7 @@ const { Canvas } = require("canvas-constructor");
 const { inspect } = require('util');
 log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' },}});
 const logger = log4js.getLogger('system');
-const JSON = {
+const J = {
   s:function(data){
     return JSON.stringify(data);
   },
