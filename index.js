@@ -70,6 +70,8 @@ function codeConnection(){
   })
 }
 //////////////////////////////////////////////////////////////////
+cron.schedule('* * * * *', () => request('https://testrpgbot.glitch.me/',()=>{}));
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   const channel = client.channels.cache.get('599272915153715201');
