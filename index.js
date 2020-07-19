@@ -7,6 +7,7 @@ const cron = require('node-cron');
 const log4js = require('log4js');
 const path = require("path");
 const https = require("https");
+const unzip = require('node-unzip-2');
 const rimraf = require("rimraf")
 const zipfolder = require("zip-folder")
 const { Canvas } = require("canvas-constructor");
