@@ -41,7 +41,7 @@ let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
 function testError(e,code="",revision=0){
-  const data = J.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/).groups)
+  const data = J.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/)?.groups||[])
   const message = typeError(`${e.name}: ${e.message}`)
   return {
     embed:{
