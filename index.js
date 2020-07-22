@@ -39,6 +39,8 @@ let memberRemoveCode = () => {}
 let updateCode = () => {}
 let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
+let unhandledCode = () => {}
+let uncaughtCode = () => {}
 //////////////////////////////////////////////////////////////////
 function testError(e,code="",revision=0){
   const data = J.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/)?.groups||[])
