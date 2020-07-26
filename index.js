@@ -71,7 +71,7 @@ function codeConnection(){
   })
 }
 //////////////////////////////////////////////////////////////////
-cron.schedule('* * * * *', () => request('https://testrpgbot.glitch.me/',()=>{}));
+cron.schedule('* * * * *', () => request('http://testrpgbot.glitch.me/',()=>{}));
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
