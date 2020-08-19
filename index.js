@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////
-const { Client, MessageAttachment } = require('discord.js');
+const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const client = new Client();
 const fs = require('fs');
 const request = require('request');
@@ -7,12 +7,27 @@ const cron = require('node-cron');
 const log4js = require('log4js');
 const path = require("path");
 const https = require("https");
+const unzip = require('node-unzip-2');
 const rimraf = require("rimraf")
 const zipfolder = require("zip-folder")
 const { Canvas } = require("canvas-constructor");
 const { inspect } = require('util');
 log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' },}});
 const logger = log4js.getLogger('system');
+const J = {
+  s:function(data){
+    return JSON.stringify(data);
+  },
+  p:function(data){
+    return JSON.parse(data);
+  },
+  c:function(data){
+    return this.p(this.s(data));
+  }
+}
+let typeError = data => {
+  return [];
+}
 let messageCode = message =>{
   if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
 }
@@ -26,22 +41,21 @@ let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
 function testError(e,code="",revision=0){
-  let data = [0,0]
-  let test = e.stack.split('\n').find(c=>c.match('eval'));
-  if(test) data = test.replace(/\(|\)/g,'').split(':').slice(-2)
+  const data = J.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/)?.groups||[])
+  const message = typeError(`${e.name}: ${e.message}`)
   return {
     embed:{
-      title: e.name,
+      title: (message[0]||e.name),
       thumbnail: {
         url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
       },
       color: 0xff0000,
-      description: `\`\`\`${e.message}
-line: ${data[0]} write: ${data[1]-revision}\`\`\``,
+      description: `\`\`\`${(message[1]||e.message)}
+line: ${data.line} write: ${data.column-revision}\`\`\``,
       fields: [
         {
           name: '**code**',
-          value: code.split('\n')[data[0]-1] ? code.split('\n')[data[0]-1]:'undefined'
+          value: code.split('\n')[data.line-1]||(data.line == 74 ? '実行コード内':e.stack.slice(0,1000))
         }
       ]
     }
@@ -57,6 +71,8 @@ function codeConnection(){
   })
 }
 //////////////////////////////////////////////////////////////////
+cron.schedule('* * * * *', () => request('http://testrpgbot.glitch.me/',()=>{}));
+
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   const channel = client.channels.cache.get('599272915153715201');
@@ -70,10 +86,6 @@ client.on('message', message=>{
     message.delete();
     codeConnection();
   }
-});
-
-process.on('unhandledRejection',async error => {
-  client.channels.cache.get('599272915153715201').send('unhandled:'+inspect(error),{split:true}).then(msg=>setTimeout(()=>msg.delete(),5000))
 });
 
 client.login(process.env.BOT_TOKEN);
