@@ -1,6 +1,6 @@
 //////////////////////////////////////////////////////////////
 const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
-const client = new Client();
+const client = new Client({restTimeOffset:1});
 const fs = require('fs');
 const request = require('request');
 const cron = require('node-cron');
