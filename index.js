@@ -40,8 +40,9 @@ let updateCode = () => {}
 let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 //////////////////////////////////////////////////////////////////
+
 function testError(e,code="",revision=0){
-  const data = J.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/)?.groups||[])
+  const data = J.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/)?.groups||{line:1,column:1})
   const message = typeError(`${e.name}: ${e.message}`)
   return {
     embed:{
@@ -55,7 +56,7 @@ line: ${data.line} write: ${data.column-revision}\`\`\``,
       fields: [
         {
           name: '**code**',
-          value: code.split('\n')[data.line-1]||(data.line == 74 ? '実行コード内':e.stack.slice(0,1000))
+          value: code.split('\n')[data.line-1]||'実行コード内'
         }
       ]
     }
