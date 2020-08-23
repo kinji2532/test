@@ -8,11 +8,11 @@ const log4js = require('log4js');
 const path = require("path");
 const https = require("https");
 const unzip = require('node-unzip-2');
-const rimraf = require("rimraf")
-const zipfolder = require("zip-folder")
+const rimraf = require("rimraf");
+const zipfolder = require("zip-folder");
 const { Canvas } = require("canvas-constructor");
 const { inspect } = require('util');
-log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' },}});
+log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' }}});
 const logger = log4js.getLogger('system');
 const J = {
   s:function(data){
