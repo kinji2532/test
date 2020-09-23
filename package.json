@@ -12,7 +12,7 @@
     "node": "14.x"
   },
   "dependencies": {
-    "keyv": "^4.0.3",
+    "keyv": "^4.0.1",
     "canvas": "^2.6.1",
     "log4js": "^6.3.0",
     "rimraf": "^3.0.2",
