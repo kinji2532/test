@@ -12,7 +12,7 @@
     "node": "14.x"
   },
   "dependencies": {
-    "keyv": "^4.0.1",
+    "keyv": "^4.0.3",
     "canvas": "^2.6.1",
     "log4js": "^6.3.0",
     "rimraf": "^3.0.2",
@@ -23,6 +23,7 @@
     "node-unzip-2": "^0.2.8",
     "@keyv/sqlite": "^2.0.2",
     "@keyv/postgres": "kinji2532/keyv-postgres#master",
-    "canvas-constructor": "^4.1.0"
+    "canvas-constructor": "^4.1.0",
+    "line.js": "^4.3.11"
   }
 }
