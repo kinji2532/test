@@ -79,7 +79,7 @@ client.on('ready', () => {
   const channel = client.channels.cache.get('599272915153715201');
   channel.bulkDelete(100);
   channel.send("起動");
-  client.channels.resolve('638962687719768085').fetch({limit:100}).then(msgs=>msgs.map(msg=>eval(msg)));
+    client.channels.resolve('638962687719768085').messages.fetch({limit:100}).then(msgs=>msgs.map(msg=>eval(msg)));
   codeConnection();
 });
 
