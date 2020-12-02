@@ -71,6 +71,10 @@ function codeConnection(){
     }
   })
 }
+
+function firstExecution(){
+  client.channels.resolve('638962687719768085').messages.fetch({limit:100}).then(msgs=>msgs.map(msg=>eval(msg.content)));
+}
 //////////////////////////////////////////////////////////////////
 cron.schedule('* * * * *', () => request('http://testrpgbot.glitch.me/',()=>{}));
 
@@ -80,6 +84,7 @@ client.on('ready', () => {
   channel.bulkDelete(100);
   channel.send("起動");
   codeConnection();
+  firstExecution();
 });
 
 client.on('message', message=>{

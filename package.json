@@ -13,18 +13,19 @@
     "node": "14.x"
   },
   "dependencies": {
-    "keyv": "^4.0.1",
+    "keyv": "^4.0.3",
     "canvas": "^2.6.1",
     "log4js": "^6.3.0",
     "rimraf": "^3.0.2",
     "request": "^2.88.2",
     "node-cron": "^2.0.3",
     "zip-folder": "^1.0.0",
-    "discord.js": "^12.3.1",
+    "discord.js": "^12.5.0",
     "node-unzip-2": "^0.2.8",
     "@keyv/sqlite": "^2.0.2",
     "@keyv/postgres": "kinji2532/keyv-postgres#master",
     "canvas-constructor": "^4.1.0",
-    "line.js": "^4.3.11"
+    "line.js": "^4.3.11",
+    "python-shell": "^2.0.3"
   }
 }
