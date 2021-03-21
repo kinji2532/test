@@ -25,8 +25,7 @@
     "@keyv/sqlite": "^2.0.2",
     "@keyv/postgres": "kinji2532/keyv-postgres#master",
     "canvas-constructor": "^4.1.0",
-    "line.js": "^4.3.11",
     "python-shell": "^2.0.3",
-    "mcnbt": "^1.0.0"
+    "node-nbt": "^1.0.0"
   }
 }
