@@ -16,8 +16,8 @@ const Py = require('python-shell').PythonShell;
 log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' }}});
 const logger = log4js.getLogger('system');
 const J = {
-  s:function(data){
-    return JSON.stringify(data);
+  s:function(data,what,indent){
+    return JSON.stringify(data,what,indent);
   },
   p:function(data){
     return JSON.parse(data);
