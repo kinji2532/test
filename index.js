@@ -1,12 +1,5 @@
 //////////////////////////////////////////////////////////////
 const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
-const { Client } = require('pg');
-const dbclient = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
 const client = new Client({restTimeOffset:1});
 const fs = require('fs');
 const request = require('request');
@@ -86,12 +79,20 @@ function firstExecution(){
 //////////////////////////////////////////////////////////////////
 cron.schedule('* * * * *', () => request('http://testrpgbot.glitch.me/',()=>{}));
 
-dbclient.connect();
-dbclient.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  dbclient.end();
-});
-
+{
+  const { Client } = require('pg');
+  const dbclient = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
+  });
+  dbclient.connect();
+  dbclient.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+    if (err) throw err;
+    dbclient.end();
+  });
+}
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
   const channel = client.channels.cache.get('599272915153715201');
