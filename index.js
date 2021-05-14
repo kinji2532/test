@@ -2,10 +2,7 @@
 const { Client, MessageAttachment, MessageEmbed } = require('discord.js');
 const client = new Client({
   restTimeOffset:1,
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  intents: Intents.ALL
 });
 const fs = require('fs');
 const request = require('request');
