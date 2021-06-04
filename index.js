@@ -49,6 +49,7 @@ let memberRemoveCode = () => {}
 let updateCode = () => {}
 let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
+let interactionCode = () => {}
 //////////////////////////////////////////////////////////////////
 
 function testError(e,code="",revision=0){
@@ -102,6 +103,10 @@ client.on('message', message=>{
     message.delete();
     codeConnection();
   }
+});
+
+client.ws.on('INTERACTION_CREATE',interaction=>{
+  interactionCode(interaction);
 });
 
 client.login(process.env.BOT_TOKEN);
