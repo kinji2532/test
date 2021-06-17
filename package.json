@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "keyv": "^4.0.3",
-    "canvas": "^2.6.1",
+    "canvas": "^2.8.0",
     "log4js": "^6.3.0",
     "rimraf": "^3.0.2",
     "request": "^2.88.2",
@@ -26,6 +26,7 @@
     "python-shell": "^3.0.0",
     "node-nbt": "^1.0.0",
     "@keyv/postgres": "kinji2532/keyv-postgres#master",
-    "pg": "^8.4.2"
+    "pg": "^8.6.0",
+    "discord-buttons": "^3.2.1"
   }
 }
