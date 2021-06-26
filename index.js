@@ -104,9 +104,11 @@ client.on('message', message=>{
     codeConnection();
   }
 });
+client.on('message',(...eventData)=>messageCode(...eventData));
+client.on('messageReactionAdd',(...eventData)=>reactionAddCode(...eventData));
+client.on('messageDelete',(...eventData)=>deleteCode(...eventData));
+client.on('messageUpdate',(...eventData)=>updateCode(...eventData));
 
-client.ws.on('INTERACTION_CREATE',interaction=>{
-  interactionCode(interaction);
-});
+client.ws.on('INTERACTION_CREATE',interaction=>interactionCode(interaction));
 
 client.login(process.env.BOT_TOKEN);
