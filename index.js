@@ -97,13 +97,13 @@ client.on('ready', () => {
   firstExecution();
 });
 
-client.on('message', message=>{
+client.on('messageCreate', message=>{
   if(message.author.id == '395010195090178058' && message.content == 'reload'){
     message.delete();
     codeConnection();
   }
 });
-client.on('message',(...eventData)=>messageCode(...eventData));
+client.on('messageCreate',(...eventData)=>messageCode(...eventData));
 client.on('messageReactionAdd',(...eventData)=>reactionAddCode(...eventData));
 client.on('messageDelete',(...eventData)=>deleteCode(...eventData));
 client.on('messageUpdate',(...eventData)=>updateCode(...eventData));
