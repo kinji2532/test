@@ -25,9 +25,8 @@
     "canvas-constructor": "^4.1.0",
     "python-shell": "^3.0.0",
     "node-nbt": "^1.0.0",
-    "@keyv/postgres": "kinji2532/keyv-postgres#master",
     "pg": "^8.6.0",
-    "discord-buttons": "^4.0.0",
-    "prismarine-nbt": "^1.6.0"
+    "prismarine-nbt": "^1.6.0",
+    "@keyv/postgres": "^1.0.16"
   }
 }
