@@ -13,7 +13,6 @@ const client = new Client({
 const fs = require('fs');
 const request = require('request');
 const cron = require('node-cron');
-const log4js = require('log4js');
 const path = require("path");
 const https = require("https");
 const unzip = require('node-unzip-2');
@@ -22,8 +21,6 @@ const zipfolder = require("zip-folder");
 const { Canvas } = require("canvas-constructor");
 const { inspect } = require('util');
 const Py = require('python-shell').PythonShell;
-log4js.configure({appenders: {system: { type: 'file', filename: './logs/system.log' }},categories: {default: { appenders: ['system'], level: 'debug' }}});
-const logger = log4js.getLogger('system');
 const J = {
   s:function(data,what,indent){
     return JSON.stringify(data,what,indent);
@@ -56,21 +53,23 @@ function testError(e,code="",revision=0){
   const data = J.c(e.stack.match(/>:(?<line>.*?):(?<column>.*?)\)/)?.groups||{line:-1,column:-1})
   const message = typeError(`${e.name}: ${e.message}`)
   return {
-    embed:{
-      title: (message[0]||e.name),
-      thumbnail: {
-        url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
-      },
-      color: 0xff0000,
-      description: `\`\`\`${(message[1]||e.message)}
+    embeds:[
+      {
+        title: (message[0]||e.name),
+        thumbnail: {
+          url: 'https://media.discordapp.net/attachments/576717465506021380/719155294546165760/image.png'
+        },
+        color: 0xff0000,
+        description: `\`\`\`${(message[1]||e.message)}
 line: ${data.line} write: ${data.column-revision}\`\`\``,
-      fields: [
-        {
-          name: '**code**',
-          value: data.line == -1 ? 'error':code.split('\n')[data.line-1]||'実行コード内'
-        }
-      ]
-    }
+        fields: [
+          {
+            name: '**code**',
+            value: data.line == -1 ? 'error':code.split('\n')[data.line-1]||'実行コード内'
+          }
+        ]
+      }
+    ]
   }
 }
 function codeConnection(){
