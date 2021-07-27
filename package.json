@@ -27,6 +27,6 @@
     "node-nbt": "^1.0.0",
     "pg": "^8.6.0",
     "prismarine-nbt": "^1.6.0",
-    "@keyv/postgres": "kinji2532/keyv-postgres#master"
+    "@keyv/postgres": "^1.0.16"
   }
 }
