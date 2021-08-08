@@ -47,6 +47,8 @@ let updateCode = () => {}
 let reactionAddCode = () => {}
 let reactionRemoveCode = () => {}
 let interactionCode = () => {}
+
+let defaultTime = 60;
 //////////////////////////////////////////////////////////////////
 
 function testError(e,code="",revision=0){
