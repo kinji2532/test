@@ -47,7 +47,7 @@ let updateCode = () => {};
 let reactionAddCode = () => {};
 let reactionRemoveCode = () => {};
 let interactionCode = () => {};
-let exitCode () => {};
+let exitCode = () => {};
 
 let defaultTime = 60;
 //////////////////////////////////////////////////////////////////
