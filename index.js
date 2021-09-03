@@ -38,15 +38,16 @@ let typeError = data => {
 let messageCode = message =>{
   if(message.content.startsWith('test')) eval(message.content.replace(/^test/g,''))
 }
-let unhandledCode = () => {}
-let uncaughtCode = () => {}
-let deleteCode = () => {}
-let memberAddCode = () => {}
-let memberRemoveCode = () => {}
-let updateCode = () => {}
-let reactionAddCode = () => {}
-let reactionRemoveCode = () => {}
-let interactionCode = () => {}
+let unhandledCode = () => {};
+let uncaughtCode = () => {};
+let deleteCode = () => {};
+let memberAddCode = () => {};
+let memberRemoveCode = () => {};
+let updateCode = () => {};
+let reactionAddCode = () => {};
+let reactionRemoveCode = () => {};
+let interactionCode = () => {};
+let exitCode () => {};
 
 let defaultTime = 60;
 //////////////////////////////////////////////////////////////////
@@ -111,5 +112,5 @@ client.on('messageDelete',(...eventData)=>deleteCode(...eventData));
 client.on('messageUpdate',(...eventData)=>updateCode(...eventData));
 
 client.on('interactionCreate',interaction=>interactionCode(interaction));
-
+process.on('SIGTERM',data=>exitCode(data));
 client.login(process.env.BOT_TOKEN);
