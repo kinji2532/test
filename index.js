@@ -2,13 +2,7 @@
 const { Client, MessageAttachment, MessageEmbed, Intents } = require('discord.js');
 const client = new Client({
   restTimeOffset:1,
-  intents: [
-    "GUILDS", "GUILD_MEMBERS", "GUILD_BANS", "GUILD_EMOJIS_AND_STICKERS",
-    "GUILD_INTEGRATIONS", "GUILD_WEBHOOKS", "GUILD_INVITES",
-    "GUILD_VOICE_STATES", "GUILD_PRESENCES", "GUILD_MESSAGES",
-    "GUILD_MESSAGE_REACTIONS", "GUILD_MESSAGE_TYPING", "DIRECT_MESSAGES",
-    "DIRECT_MESSAGE_REACTIONS", "DIRECT_MESSAGE_TYPING"
-  ]
+  intents: Object.keys(Intents.FLAGS)
 });
 const fs = require('fs');
 const request = require('request');
