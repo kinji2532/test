@@ -15,7 +15,7 @@
   "dependencies": {
     "keyv": "^4.0.3",
     "canvas": "^2.8.0",
-    "log4js": "^6.3.0",
+    "log4js": "^6.4.0",
     "rimraf": "^3.0.2",
     "request": "^2.88.2",
     "node-cron": "^3.0.0",
