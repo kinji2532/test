@@ -18,7 +18,8 @@ const client = new Client({
     'DIRECT_MESSAGES',
     'DIRECT_MESSAGE_REACTIONS',
     'DIRECT_MESSAGE_TYPING'
-  ]
+  ],
+  partials: ['MESSAGE', 'CHANNEL', 'REACTION']
 });
 const fs = require('fs');
 const request = require('request');
